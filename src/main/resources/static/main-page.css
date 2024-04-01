@@ -1,0 +1,99 @@
+/*
+	File: main-page.css
+	Path: src/main/resources/static/main-page.css
+	Author: Chia-Yu(Joyce) Chang
+	Created: 2024-03-28
+	Last Modified: 2024-03-28
+	Description: This file contains the CSS styles for the Hotel Management System's main page (main.html)
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: url("images/hotel2.jpeg") no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 290px;
+	height: 100%;
+	background: transparent;
+	backdrop-filter: blur(40px);
+}
+
+.sidebar .title-menu {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 80px;
+	background: deepskyblue;
+}
+
+.sidebar .title-menu .title {
+	font-size: 20px;
+	color: white;
+	pointer-events: none;
+	padding-left: 45px;
+}
+
+.sidebar .title-menu .button {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+}
+
+.sidebar .list {
+	margin-top: 5px;
+}
+
+.sidebar .list .category.logout {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.list .category {
+	list-style: none;
+	width: 100%;
+	height: 70px;
+	margin: 3px 0;
+	line-height: 70px;
+	padding: 6px 8px;
+}
+
+.list .category a {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	color: white;
+	text-decoration: none;
+	border-radius: 6px;
+	transition: .5s;
+}
+
+.list .category.active a,
+.list .category a:hover {
+	background: rgba(255, 255, 255, .2);	
+}
+
+.list .category a i {
+	min-width: 50px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+
