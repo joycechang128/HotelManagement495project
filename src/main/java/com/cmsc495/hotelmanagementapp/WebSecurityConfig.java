@@ -7,7 +7,7 @@ package com.cmsc495.hotelmanagementapp;
  * Created: 2024-03-30
  * Last Modified: 2024-03-30
  * Description: This file contains the configuration class for web security settings,
- * 				preventing the unauthorized access to /main.
+ * 				preventing the unauthorized access to main and management pages.
  */
 
 import org.springframework.context.annotation.Bean;
@@ -28,8 +28,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()								// require authentication to access these pages
-                .requestMatchers("/main", "/room", "/customer", "reservation",
-                		"billing", "housekeeping", "visualreport").authenticated()
+                .requestMatchers("/main", "/room", "/customer", "/reservation",
+                		"/billing", "/housekeeping", "/visualreport").authenticated()
                 .anyRequest().permitAll()						// allow access to all other pages
                 .and()
             .formLogin()
