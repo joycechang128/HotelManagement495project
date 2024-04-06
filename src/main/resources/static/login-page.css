@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/login-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-25
-	Last Modified: 2024-03-30
+	Last Modified: 2024-04-03
 	Description: This file contains the CSS styles for the Hotel Management System's login page (login.html)
 */
 
@@ -40,12 +40,19 @@ section {
 
 h1 {
 	font-size: 1.5em;
+	Color: #00FFFF;
+	text-align: center;
+	margin-bottom: 8px;
+}
+
+h2 {
+	font-size: 1.5em;
 	Color: white;
 	text-align: center;
 	margin-bottom: 20px;
 }
 
-h2 {
+h3 {
 	font-size: 1em;
 	Color: white;
 	text-align: center;
