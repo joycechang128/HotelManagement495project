@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/login.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-25
-	Last Modified: 2024-03-30
+	Last Modified: 2024-04-03
 	Description: This HTML file represents the login page of the hotel management system.
 				 It provides a form for the user(owner) to input their credentials (username and password) 
 				 in order to log into the system. Upon successful authentication, users will be 
@@ -23,8 +23,9 @@
 	<section>
 		<div class="login">
 			<form action="/login" method="post">
-				<h1>XX Hotel Management System</h1>
-				<h2>Login</h2>
+				<h1>LUXUREST</h1>
+				<h2>Hotel Management System</h2>
+				<h3>Login</h3>
 				<p th:if="${param.error}" class="error">Incorrect username or password</p>	<!-- for handling error -->
 				<div class="input">
 					<span class="icon">
