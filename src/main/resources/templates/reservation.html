@@ -1,11 +1,11 @@
 <!--
-	File: main.html
-	Path: src/main/resources/templates/main.html
+	File: reservation.html
+	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-03-28
-	Description: This HTML file represents the main page of the hotel management system,
-				 which serves as the central hub of the hotel management system.
+	Last Modified: 2024-04-07
+	Description: This HTML file represents the reservation page of the hotel management system,
+	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
 
 <!DOCTYPE html>
@@ -20,43 +20,43 @@
 <body>
 	<nav class="sidebar">
 		<div class="title-menu">
-			<h2 class="title">XX Hotel Management</h2>
+			<h2 class="title">LuxuRest.com</h2>
 			<i class='bx bx-menu button'></i>
 		</div>
 		
 		<ul class="list">
 			<li class="category">
-				<a href="#">
+				<a href="room">
 					<i class='bx bxs-hotel' ></i>
 					<span class="link-name">Room Management</span>
 				</a>
 			</li>
 			<li class="category">
-				<a href="#">
+				<a href="customer">
 					<i class='bx bxs-user-detail' ></i>
 					<span class="link-name">Customer Management</span>
 				</a>
 			</li>
 			<li class="category">
-				<a href="#">
+				<a href="reservation">
 					<i class='bx bx-calendar-check' ></i>
 					<span class="link-name">Reservation Management</span>
 				</a>
 			</li>
 			<li class="category">
-				<a href="#">
+				<a href="billing">
 					<i class='bx bx-dollar-circle'></i>
 					<span class="link-name">Billing Management</span>
 				</a>
 			</li>
 			<li class="category">
-				<a href="#">
+				<a href="housekeeping">
 					<i class='bx bxs-brush-alt'></i>
 					<span class="link-name">Housekeeping Management</span>
 				</a>
 			</li>
 			<li class="category">
-				<a href="#">
+				<a href="visualreport">
 					<i class='bx bxs-report'></i>
 					<span class="link-name">Visual Report</span>
 				</a>
@@ -68,9 +68,163 @@
             	</a>
         	</li>
 		</ul>
-		
 	</nav>
 
+	<!-- below is the table structure-->
+	<main class="table">
+		<section class="table_header">
+			<h1>Reservations</h1>
+		</section>
+		<section class="table_body">
+			<table>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Customer Name</th>
+						<th>Room #</th>
+						<th>Check-in Date</th>
+						<th>Check-out Date</th>
+						<th>Payment Status</th>
+						<th>Action</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="row">
+						<td>1</td>
+						<td>Joyce Chang</td>
+						<td>101</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>2</td>
+						<td>Keita Alex</td>
+						<td>102</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>3</td>
+						<td>Brandon Davis</td>
+						<td>201</td>
+						<td>2 April, 2024</td>
+						<td>4 April, 2024</td>
+						<td>
+							<p class="status paid">Paid</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>4</td>
+						<td>Bryce Campbell</td>
+						<td>101</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>5</td>
+						<td>Bryce Campbell</td>
+						<td>102</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>6</td>
+						<td>Mrigank Gupta</td>
+						<td>201</td>
+						<td>2 April, 2024</td>
+						<td>4 April, 2024</td>
+						<td>
+							<p class="status paid">Paid</p>
+						</td>
+						<td></td>
+					</tr>
+										<tr class="row">
+						<td>7</td>
+						<td>Joyce Chang</td>
+						<td>101</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>8</td>
+						<td>Keita Alex</td>
+						<td>102</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>9</td>
+						<td>Brandon Davis</td>
+						<td>201</td>
+						<td>2 April, 2024</td>
+						<td>4 April, 2024</td>
+						<td>
+							<p class="status paid">Paid</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>10</td>
+						<td>Mrigank Gupta</td>
+						<td>201</td>
+						<td>2 April, 2024</td>
+						<td>4 April, 2024</td>
+						<td>
+							<p class="status paid">Paid</p>
+						</td>
+						<td></td>
+					</tr>
+										<tr class="row">
+						<td>11</td>
+						<td>Joyce Chang</td>
+						<td>101</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td></td>
+					</tr>
+					<tr class="row">
+						<td>12</td>
+						<td>Keita Alex</td>
+						<td>102</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
 </body>
 
 </html>
