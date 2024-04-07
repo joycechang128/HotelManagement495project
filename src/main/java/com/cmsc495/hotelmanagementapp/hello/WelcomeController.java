@@ -20,7 +20,7 @@ public class WelcomeController {
     @ResponseBody
     public String helloWorld()
     {
-        return "Hello World!";
+        return "Welcome to LuxuRest management system, please add /login to your URL to login";
     }
 }
 
