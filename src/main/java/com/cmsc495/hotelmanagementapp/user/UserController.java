@@ -7,7 +7,7 @@ package com.cmsc495.hotelmanagementapp.user;
  * Created: 2024-03-25
  * Last Modified: 2024-03-30
  * Description: This file contains the Java controller class for the Hotel Management System's login page (login.html), 
- * 				responsible for handling user requests and managing interactions with the login page.
+ *              responsible for handling user requests and managing interactions with the login page.
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
