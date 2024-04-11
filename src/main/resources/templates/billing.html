@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/billing.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-07
+	Last Modified: 2024-04-10
 	Description: This HTML file represents the billing page of the hotel management system,
 	             which facilitates the management of billings, allowing users to add, delete, and modify billings.
 -->
@@ -71,6 +71,101 @@
 		
 	</nav>
 
+
+	<!-- below is the table structure-->
+	<main class="table">
+		<section class="table_header">
+			<h1>Billings</h1>
+		</section>
+		<section class="table_body">
+			<table>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Customer Name</th>
+						<th>Check-in Date</th>
+						<th>Check-out Date</th>
+						<th>Amount</th>
+						<th>Payment Status</th>
+						<th>Action</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="row">
+						<td>1</td>
+						<td>Kash Bentley</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td><strong>85.80</strong></td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>2</td>
+						<td>Danny Whitehead</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td><strong>99.99</strong></td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>3</td>
+						<td>Oakley Brooks</td>
+						<td>2 April, 2024</td>
+						<td>4 April, 2024</td>
+						<td><strong>150.3</strong></td>
+						<td>
+							<p class="status paid">Paid</p>
+						</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>4</td>
+						<td>Sage Hudson</td>
+						<td>16 March, 2024</td>
+						<td>1 April, 2024</td>
+						<td><strong>140.2</strong></td>
+						<td>
+							<p class="status overdue">Overdue</p>
+						</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>5</td>
+						<td>Forrest Manning</td>
+						<td>29 March, 2024</td>
+						<td>3 April, 2024</td>
+						<td><strong>203.56</strong></td>
+						<td>
+							<p class="status unpaid">Unpaid</p>
+						</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	
 </body>
 
 </html>

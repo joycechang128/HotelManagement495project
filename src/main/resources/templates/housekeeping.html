@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/housekeeping.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-07
+	Last Modified: 2024-04-10
 	Description: This HTML file represents the housekeeping page of the hotel management system,
 	             which facilitates the management of housekeepings, allowing users to add, delete, and modify housekeepings.
 -->
@@ -70,6 +70,112 @@
 		</ul>
 		
 	</nav>
+	
+	<!-- below is the table structure-->
+	<main class="table">
+		<section class="table_header">
+			<h1>Housekeepings</h1>
+		</section>
+		<section class="table_body">
+			<table>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Housekeeper Name</th>
+						<th>Contact Info</th>
+						<th>Shift</th>
+						<th>Room #</th>
+						<th>Room Type</th>
+						<th>Cleaning Status</th>
+						<th>Last Cleaning Date</th>
+						<th>Action</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="row">
+						<td>1</td>
+						<td>Liliana McCormick</td>
+						<td>111-111-1111</td>
+						<td>Night</td>
+						<td>102</td>
+						<td>Double</td>
+						<td>
+							<p class="status prepared">Prepared</p>
+						</td>
+						<td>1 April, 2024</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>2</td>
+						<td>Jasiah Strong</td>
+						<td>222-222-2222</td>
+						<td>Day</td>
+						<td>202</td>
+						<td>Triple</td>
+						<td>
+							<p class="status unprepared">Needs Cleaning</p>
+						</td>
+						<td>3 April, 2024</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>3</td>
+						<td>Jalen Sanders</td>
+						<td>333-333-3333</td>
+						<td>Night</td>
+						<td>203</td>
+						<td>Triple</td>
+						<td>
+							<p class="status unprepared">Needs Cleaning</p>
+						</td>
+						<td>4 April, 2024</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>4</td>
+						<td>Fernanda Reyes</td>
+						<td>444-444-4444</td>
+						<td>Day</td>
+						<td>302</td>
+						<td>Double</td>
+						<td>
+							<p class="status prepared">Prepared</p>
+						</td>
+						<td>1 April, 2024</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+					<tr class="row">
+						<td>5</td>
+						<td>Kaison Morse</td>
+						<td>555-555-5555</td>
+						<td>Night</td>
+						<td>402</td>
+						<td>Triple</td>
+						<td>
+							<p class="status prepared">Prepared</p>
+						</td>
+						<td>3 April, 2024</td>
+						<td>
+							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
 
 </body>
 
