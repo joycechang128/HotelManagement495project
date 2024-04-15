@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/customer.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-10
+	Last Modified: 2024-04-14
 	Description: This HTML file represents the customer page of the hotel management system,
 	             which facilitates the management of customers, allowing users to add, delete, and modify customers.
 -->
@@ -70,106 +70,125 @@
 		</ul>
 		
 	</nav>
+	
+	<div class="container">
+		<!-- below is cards for statistic-->
+		<div class="stat-card stat-card-1">
+			<div class="card">
+				<div>
+					<div class="stats">12</div>
+					<div class="card-name"># of Customers</div>
+				</div>
+				<div class="card-icon">
+					<i class='bx bxs-face'></i>
+				</div>
+			</div>
+		</div>
 
-	<!-- below is the table structure-->
-	<main class="table">
-		<section class="table_header">
-			<h1>Customers</h1>
-		</section>
-		<section class="table_body">
-			<table>
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>Customer Name</th>
-						<th>Email</th>
-						<th>Phone Number</th>
-						<th>Room #</th>
-						<th># of Reservations</th>
-						<th>Payment Status</th>
-						<th>Action</th>						
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="row">
-						<td>1</td>
-						<td>Kash Bentley</td>
-						<td>kashbentley@gmail.com</td>
-						<td>111-111-1111</td>
-						<td>101</td>
-						<td>1</td>
-						<td>
-							<p class="status overdue">Overdue</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>2</td>
-						<td>Danny Whitehead</td>
-						<td>dannywhitehead@gmail.com</td>
-						<td>222-222-2222</td>
-						<td>102</td>
-						<td>2</td>
-						<td>
-							<p class="status unpaid">Unpaid</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>3</td>
-						<td>Oakley Brooks</td>
-						<td>oakleybrooks@gmail.com</td>
-						<td>111-222-3333</td>
-						<td>103</td>
-						<td>1</td>
-						<td>
-							<p class="status paid">Paid</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>4</td>
-						<td>Sage Hudson</td>
-						<td>shudson@gmail.com</td>
-						<td>555-555-5555</td>
-						<td>202</td>
-						<td>2</td>
-						<td>
-							<p class="status overdue">Overdue</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>5</td>
-						<td>Forrest Manning</td>
-						<td>fmanning@gmail.com</td>
-						<td>777-111-3333</td>
-						<td>303</td>
-						<td>2</td>
-						<td>
-							<p class="status unpaid">Unpaid</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</section>
-	</main>
+		<!-- below is the table structure-->
+		<main class="table">
+			<section class="table_header">
+				<h1>Customers</h1>
+				<div>
+					<input placeholder="customer">
+					<button class="create">+ Create</button>
+				</div>
+			</section>
+			<section class="table_body">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Customer Name</th>
+							<th>Email</th>
+							<th>Phone Number</th>
+							<th>Room #</th>
+							<th># of Reservations</th>
+							<th>Payment Status</th>
+							<th>Action</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="row">
+							<td>1</td>
+							<td>Kash Bentley</td>
+							<td>kashbentley@gmail.com</td>
+							<td>111-111-1111</td>
+							<td>101</td>
+							<td>1</td>
+							<td>
+								<p class="status overdue">Overdue</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>2</td>
+							<td>Danny Whitehead</td>
+							<td>dannywhitehead@gmail.com</td>
+							<td>222-222-2222</td>
+							<td>102</td>
+							<td>2</td>
+							<td>
+								<p class="status unpaid">Unpaid</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>3</td>
+							<td>Oakley Brooks</td>
+							<td>oakleybrooks@gmail.com</td>
+							<td>111-222-3333</td>
+							<td>103</td>
+							<td>1</td>
+							<td>
+								<p class="status paid">Paid</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>4</td>
+							<td>Sage Hudson</td>
+							<td>shudson@gmail.com</td>
+							<td>555-555-5555</td>
+							<td>202</td>
+							<td>2</td>
+							<td>
+								<p class="status overdue">Overdue</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>5</td>
+							<td>Forrest Manning</td>
+							<td>fmanning@gmail.com</td>
+							<td>777-111-3333</td>
+							<td>303</td>
+							<td>2</td>
+							<td>
+								<p class="status unpaid">Unpaid</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</div>
 </body>
 
 </html>

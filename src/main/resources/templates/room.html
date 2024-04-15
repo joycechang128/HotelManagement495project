@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/room.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-10
+	Last Modified: 2024-04-14
 	Description: This HTML file represents the room page of the hotel management system,
 	             which facilitates the management of rooms, allowing users to add, delete, and modify rooms.
 -->
@@ -69,100 +69,146 @@
         	</li>
 		</ul>
 	</nav>
-
-	<!-- below is the table structure-->
-	<main class="table">
-		<section class="table_header">
-			<h1>Rooms</h1>
-		</section>
-		<section class="table_body">
-			<table>
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>Room #</th>
-						<th>Floor</th>
-						<th>Room Type</th>
-						<th>Availability</th>
-						<th>Cleaning Status</th>
-						<th>Action</th>						
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="row">
-						<td>1</td>
-						<td>101</td>
-						<td>1</td>
-						<td>Double</td>
-						<td><i class="bx bx-check icon-true"></i></td>						
-						<td>
-							<p class="status prepared">Prepared</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>2</td>
-						<td>102</td>
-						<td>1</td>
-						<td>Double</td>
-						<td><i class="bx bx-check icon-true"></i></td>						
-						<td>
-							<p class="status prepared">Prepared</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>3</td>
-						<td>202</td>
-						<td>2</td>
-						<td>Triple</td>
-						<td><i class="bx bx-x icon-false"></i></td>						
-						<td>
-							<p class="status unprepared">Needs Cleaning</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>4</td>
-						<td>204</td>
-						<td>2</td>
-						<td>Twin</td>
-						<td><i class="bx bx-check icon-true"></i></td>						
-						<td>
-							<p class="status prepared">Prepared</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-					<tr class="row">
-						<td>5</td>
-						<td>301</td>
-						<td>3</td>
-						<td>Family</td>
-						<td><i class="bx bx-x icon-false"></i></td>						
-						<td>
-							<p class="status unprepared">Needs Cleaning</p>
-						</td>
-						<td>
-							<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</section>
-	</main>
+	
+	<div class="container">
+		<!-- below is cards for statistic-->
+		<div class="stat-card stat-card-4">
+			<div class="card">
+				<div>
+					<div class="stats">10</div>
+					<div class="card-name"># of Rooms</div>
+				</div>
+				<div class="card-icon">
+					<i class='bx bx-bed'></i>
+				</div>
+			</div>
+			<div class="card">
+				<div>
+					<div class="stats">7</div>
+					<div class="card-name">Available</div>
+				</div>
+				<div class="card-icon">
+					<i class='bx bx-user-check'></i>
+				</div>
+			</div>
+			<div class="card">
+				<div>
+					<div class="stats">5</div>
+					<div class="card-name">Cleaning Prepared</div>
+				</div>
+				<div class="card-icon">
+					<i class='bx bx-check-square'></i>
+				</div>
+			</div>
+			<div class="card">
+				<div>
+					<div class="stats">5</div>
+					<div class="card-name">Available &amp; Prepared</div>
+				</div>
+				<div class="card-icon">
+					<i class='bx bx-check-double'></i>
+				</div>
+			</div>
+		</div>
+		
+		<!-- below is the table structure-->
+		<main class="table">
+			<section class="table_header">
+				<h1>Rooms</h1>
+				<div>
+					<input placeholder="room #">
+					<button class="create">+ Create</button>
+				</div>
+			</section>
+			<section class="table_body">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Room #</th>
+							<th>Floor</th>
+							<th>Room Type</th>
+							<th>Availability</th>
+							<th>Cleaning Status</th>
+							<th>Action</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="row">
+							<td>1</td>
+							<td>101</td>
+							<td>1</td>
+							<td>Double</td>
+							<td><i class="bx bx-check icon-true"></i></td>						
+							<td>
+								<p class="status prepared">Prepared</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>2</td>
+							<td>102</td>
+							<td>1</td>
+							<td>Double</td>
+							<td><i class="bx bx-check icon-true"></i></td>						
+							<td>
+								<p class="status prepared">Prepared</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>3</td>
+							<td>202</td>
+							<td>2</td>
+							<td>Triple</td>
+							<td><i class="bx bx-x icon-false"></i></td>						
+							<td>
+								<p class="status unprepared">Needs Cleaning</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>4</td>
+							<td>204</td>
+							<td>2</td>
+							<td>Twin</td>
+							<td><i class="bx bx-check icon-true"></i></td>						
+							<td>
+								<p class="status prepared">Prepared</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+						<tr class="row">
+							<td>5</td>
+							<td>301</td>
+							<td>3</td>
+							<td>Family</td>
+							<td><i class="bx bx-x icon-false"></i></td>						
+							<td>
+								<p class="status unprepared">Needs Cleaning</p>
+							</td>
+							<td>
+								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</div>
 </body>
 
 </html>
