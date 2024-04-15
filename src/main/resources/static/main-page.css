@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/main-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-10
+	Last Modified: 2024-04-14
 	Description: This file contains the CSS styles for the Hotel Management System's main page (main.html)
 	             and all management pages
 */
@@ -22,6 +22,7 @@ body {
 	background-position: center;
 	display: grid;
     grid-template-columns: 290px auto;
+    overflow: hidden;
 }
 
 /*
@@ -105,6 +106,78 @@ body {
 }
 
 /*
+	cards and tables
+*/
+
+.container {
+	grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+/*
+	For cards
+*/
+
+.stat-card {
+	position: relative;
+	width: 85%;	
+	max-width: 1200px;
+    margin: 20px auto 30px;
+    border-radius: .8rem;
+    display: grid;
+    gap: 20px;
+    height: 10vh;
+}
+
+.stat-card-1 {
+	width: 35%;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.stat-card-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.stat-card-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-card-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.stat-card .card {
+	position: relative;
+	background: #f9f9f9;
+	padding: 30px;
+	border-radius: 20px;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card .card .stats {
+	position: relative;
+	font-weight: 300;
+	font-size: 1.5rem;
+	color: blue;
+}
+
+.stat-card .card .card-name {
+	font-size: 1.0rem;
+	color: black;
+	margin-top: 5px;
+}
+
+.stat-card .card .card-icon {
+	font-size: 2.5rem;
+	color: black;
+}
+
+/*
 	For all management pages' tables
 */
 
@@ -116,15 +189,15 @@ body {
 }
 
 .table {
-	grid-column: 2;
     width: 85%;
-    margin: 20px auto;
-    height: 90vh;
+    margin: 30px auto 20px;
+    height: calc(100% - 130px);
     background-color: #fff5;
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
     overflow: hidden;
+    flex: 1;
 }
 
 .table th, .table td {
@@ -136,11 +209,42 @@ body {
 }
 
 .table_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	height: 10%;
 	background-color: #fff4;
 	padding: .8rem 1rem;
 	padding-top: 20px;
+}
+
+button {
+	outline: none;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.create {
+	padding: 10px 20px;
+	font-size: 1rem;
+	color: black;
+	background-color: limegreen;
+	margin-right: 20px;
+}
+
+.create:hover {
+    background-color: lightgreen;
+}
+
+input {
+	padding: 10px 20px;
+	margin: 0 10px;	
+	outline: none;
+	border: 1px solid black;
+	border-radius: 6px;
+	color: black;
 }
 
 .table_body {
@@ -177,7 +281,7 @@ body {
 	position: sticky;
 	top: 0;
 	left: 0;
-	background-color: #D5D1DE;	
+	background-color: #B3E5FC;	
 }
 
 .table tbody .row {
@@ -185,7 +289,7 @@ body {
 }
 
 .table tbody .row:nth-child(even) {
-	background-color: #0000000b;
+	background-color: #F5F5F5;
 }
 
 .table tbody .row:hover {
@@ -210,6 +314,10 @@ body {
 	cursor: pointer;
 }
 
+.edit-btn:hover {
+    background-color: skyblue;
+}
+
 .delete-btn {
 	display: inline-flex;
 	align-items: center;
@@ -230,7 +338,7 @@ body {
 
 .status {
 	padding: .4rem 0;
-	border-radius: 2rem;
+	border-radius: 4px;
 	text-align: center;
 }
 
@@ -251,12 +359,6 @@ body {
 /*
 	For room/housekeeping tables "cleaning status" background color & color
 */
-
-.status {
-	padding: .4rem 0;
-	border-radius: 2rem;
-	text-align: center;
-}
 
 .status.prepared {
 	background-color: #86E49D;
