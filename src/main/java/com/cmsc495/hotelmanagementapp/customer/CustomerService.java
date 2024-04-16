@@ -10,6 +10,16 @@ package com.cmsc495.hotelmanagementapp.customer;
  * 				...
  */
 
-public class CustomerService {
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class CustomerService {
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	public List<Customer> getAllCustomers() {
+		return customerRepository.findAll();
+	}
 }

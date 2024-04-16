@@ -12,9 +12,8 @@ package com.cmsc495.hotelmanagementapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 public class HotelmanagementappApplication {
 
 	public static void main(String[] args) {
