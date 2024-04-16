@@ -10,6 +10,20 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * 				...
  */
 
-public class ReservationRepository {
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
+	
+	List<Reservation> findAll();
+		
+	/*
+	// below @Query has the same function as "findReservationById(int reservationId)"
+	@Query("SELECT r FROM Reservation r WHERE r.reservationId = ?")
+	Optional<Reservation> findReservationById(int reservationId);
+	*/
 }
