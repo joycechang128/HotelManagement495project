@@ -5,11 +5,20 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
- * Last Modified: 2024-0x-xx
+ * Last Modified: 2024-04-16
  * Description: This file contains...
  * 				...
  */
 
-public class RoomRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+public interface RoomRepository extends JpaRepository<Room, Integer> {
+    Room save(Room room);
+
+    Room findById(int roomId);
+
+    List<Room> findAll();
+
+    void deleteById(int roomId);
 }
