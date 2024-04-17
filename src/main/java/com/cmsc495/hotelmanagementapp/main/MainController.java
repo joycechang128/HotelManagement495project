@@ -34,11 +34,11 @@ public class MainController {
 		return "customer";
 	}
 	
-	// The value="reservation" will map to the <a href="reservation"> tag in main.html -> the reservation management button
-	@GetMapping("/reservation")
-	public String reservationPage() {
-		return "reservation";
-	}
+//	// The value="reservation" will map to the <a href="reservation"> tag in main.html -> the reservation management button
+//	@GetMapping("/reservation")
+//	public String reservationPage() {
+//		return "reservation";
+//	}
 	
 	// The value="billing" will map to the <a href="billing"> tag in main.html -> the billing management button
 	@GetMapping("/billing")

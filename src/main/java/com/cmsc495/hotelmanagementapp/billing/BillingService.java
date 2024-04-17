@@ -10,6 +10,16 @@ package com.cmsc495.hotelmanagementapp.billing;
  * 				...
  */
 
-public class BillingService {
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class BillingService {
+	@Autowired
+	private BillingRepository billingRepository;
+	
+	public List<Billing> getAllBillings() {
+		return billingRepository.findAll();
+	}
 }

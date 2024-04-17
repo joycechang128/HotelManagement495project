@@ -3,13 +3,15 @@
 	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-14
+	Last Modified: 2024-04-15
 	Description: This HTML file represents the reservation page of the hotel management system,
 	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 	
 <head>
 	<title>Hotel Management Main Page with Sidebar Menu</title>
@@ -125,168 +127,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="row">
-							<td>1</td>
-							<td>Kash Bentley</td>
-							<td>101</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
+						<tr th:each="reservation: ${reservations}" class="row">
+							<td th:text="${reservation.reservationId}"></td>
+							<td th:text="${reservation.customerName}"></td>
+							<td th:text="${reservation.roomNumber}"></td>
+							<td th:text="${reservation.checkInDate}"></td>
+							<td th:text="${reservation.checkOutDate}"></td>
 							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>2</td>
-							<td>Danny Whitehead</td>
-							<td>102</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>3</td>
-							<td>Oakley Brooks</td>
-							<td>201</td>
-							<td>2 April, 2024</td>
-							<td>4 April, 2024</td>
-							<td>
-								<p class="status paid">Paid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>4</td>
-							<td>Sage Hudson</td>
-							<td>101</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
-							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>5</td>
-							<td>Forrest Manning</td>
-							<td>102</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>6</td>
-							<td>Will Johnston</td>
-							<td>201</td>
-							<td>2 April, 2024</td>
-							<td>4 April, 2024</td>
-							<td>
-								<p class="status paid">Paid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>7</td>
-							<td>Andrea Hart</td>
-							<td>101</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
-							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>8</td>
-							<td>Emmitt Bean</td>
-							<td>102</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>9</td>
-							<td>Joel Osborne</td>
-							<td>201</td>
-							<td>2 April, 2024</td>
-							<td>4 April, 2024</td>
-							<td>
-								<p class="status paid">Paid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>10</td>
-							<td>Murphy Tate</td>
-							<td>201</td>
-							<td>2 April, 2024</td>
-							<td>4 April, 2024</td>
-							<td>
-								<p class="status paid">Paid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>11</td>
-							<td>Quentin Singleton</td>
-							<td>101</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
-							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>12</td>
-							<td>Evan Wiley</td>
-							<td>102</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
+								<p th:class="${reservation.billing.paymentStatus == 'Overdue' ? 'status overdue' :
+             								reservation.billing.paymentStatus == 'Paid' ? 'status paid' :
+             								reservation.billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}"></p>
 							</td>
 							<td>
 								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>

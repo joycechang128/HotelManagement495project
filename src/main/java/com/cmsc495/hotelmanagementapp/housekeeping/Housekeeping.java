@@ -11,5 +11,5 @@ package com.cmsc495.hotelmanagementapp.housekeeping;
  */
 
 public class Housekeeping {
-
+	public Housekeeping() {}
 }
