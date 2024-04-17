@@ -134,9 +134,9 @@
 							<td th:text="${reservation.checkInDate}"></td>
 							<td th:text="${reservation.checkOutDate}"></td>
 							<td>
-								<p th:class="${reservation.billing.paymentStatus == 'Overdue'} ? 'status overdue' :
-             								${reservation.billing.paymentStatus == 'Paid'} ? 'status paid' :
-             								${reservation.billing.paymentStatus == 'Unpaid'} ? 'status unpaid' : ''"></p>
+								<p th:class="${reservation.billing.paymentStatus == 'Overdue' ? 'status overdue' :
+             								reservation.billing.paymentStatus == 'Paid' ? 'status paid' :
+             								reservation.billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}"></p>
 							</td>
 							<td>
 								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
