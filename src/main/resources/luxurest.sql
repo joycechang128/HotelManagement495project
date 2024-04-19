@@ -49,7 +49,7 @@ CREATE TABLE room (
     RoomType VARCHAR(255),
     Availability BOOLEAN,
     CleaningStatus VARCHAR(255),
-    LastCleaningDate DATETIME,
+    LastCleaningDate DATE,
     HousekeepingID INT,
     FOREIGN KEY (HousekeepingID) REFERENCES Housekeeping(HousekeepingID)
 );
@@ -97,8 +97,8 @@ CREATE TABLE reservation (
     ReservationID INT PRIMARY KEY AUTO_INCREMENT,
     CustomerID INT,
     RoomID INT,
-    CheckInDate DATETIME,
-    CheckOutDate DATETIME,
+    CheckInDate DATE,
+    CheckOutDate DATE,
     BillingID INT,
     FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
     FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
