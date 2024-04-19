@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-0x-xx
+ * Last Modified: 2024-04-19
  * Description: This file contains...
  * 				...
  */
@@ -47,25 +47,26 @@ public class Reservation {
 	@JoinColumn(name="BillingID", referencedColumnName="BillingID")
 	private Billing billing;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckInDate", nullable = false)
-    private Date checkInDateTime;
+    private Date checkInDate;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckOutDate", nullable = false)
-    private Date checkOutDateTime;
+    private Date checkOutDate;
 
-	public Reservation() {}
-	
 	/* constructor, reservationId is not required because it is generated automatically by the database */
+	public Reservation() {
+	}
+	
 	public Reservation(Customer customer, Room room, Billing billing,
-			Date checkInDateTime, Date checkOutDateTime) {
+			Date checkInDate, Date checkOutDate) {
 		super();
 		this.customer = customer;
 		this.room = room;
 		this.billing = billing;
-		this.checkInDateTime = checkInDateTime;
-		this.checkOutDateTime = checkOutDateTime;
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
 	}
 	
 	public int getReservationId() {
@@ -89,19 +90,19 @@ public class Reservation {
 	}
 	
 	public Date getCheckInDate() {
-		return checkInDateTime;
+		return checkInDate;
 	}
 	
-	public void setCheckInDate(Date checkInDateTime) {
-		this.checkInDateTime = checkInDateTime;
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
 	}
 	
 	public Date getCheckOutDate() {
-		return checkOutDateTime;
+		return checkOutDate;
 	}
 	
-	public void setCheckOutDate(Date checkOutDateTime) {
-		this.checkOutDateTime = checkOutDateTime;
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
 	}
 	
 	public Billing getBilling() {
