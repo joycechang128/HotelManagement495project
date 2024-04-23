@@ -219,11 +219,27 @@ body {
 	padding-top: 20px;
 }
 
+/*
+	For all buttons
+*/
+
 button {
 	outline: none;
 	border: none;
 	border-radius: 6px;
 	cursor: pointer;
+}
+
+/*
+	For create buttons
+*/
+
+a {
+	outline: none;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .create {

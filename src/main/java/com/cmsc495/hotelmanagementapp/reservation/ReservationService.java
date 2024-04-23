@@ -11,6 +11,8 @@ package com.cmsc495.hotelmanagementapp.reservation;
  */
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +26,19 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 	
-	/*
 	public void save(Reservation reservation) {
 		reservationRepository.save(reservation);
 	}
-
+	
 	public void makeReservation(Reservation reservation) {
-		reservationRepository.findReservationById(reservation.getReservationId());
-	}*/
+        reservationRepository.save(reservation);
+    }
+	
+	public Optional<Reservation> findReservationById(int reservationId) {
+        return reservationRepository.findReservationByReservationId(reservationId);
+    }
+	
+	public void deleteReservationById(int reservationId) {
+        reservationRepository.deleteReservationByReservationId(reservationId);
+    }
 }
