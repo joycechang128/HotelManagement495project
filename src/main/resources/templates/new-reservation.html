@@ -1,0 +1,44 @@
+<!--
+	File: new-reservation.html
+	Path: src/main/resources/templates/new-reservation.html
+	Author: Chia-Yu(Joyce) Chang
+	Created: 2024-04-23
+	Last Modified: 2024-04-23
+	Description: This HTML file represents the creating page of the reservation system,
+	             which facilitates the management of billings, allowing users to add, delete, and modify billings.
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <meta charset="UTF-8">
+    <title>New Reservation</title>
+    <link rel="stylesheet" href="/create-page.css">
+</head>
+
+<body>
+	<section>
+		<div class="create">
+			<form action="/reservation/save" method="post">
+				<h1>New Reservation</h1>
+			    <label for="customerName">Customer Name:</label>
+			    <input type="text" id="customerName" name="customerName" placeholder="Enter customer name"><br>
+			
+			    <label for="roomNumber">Room Number:</label>
+			    <select id="roomNumber" name="roomNumber">
+			        <option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomNumber}"></option>
+			    </select><br>
+			
+			    <label for="checkInDate">Check-in Date:</label>
+			    <input type="text" id="checkInDate" name="checkInDate" placeholder="Enter check-in date"><br>
+			
+			    <label for="checkOutDate">Check-out Date:</label>
+			    <input type="text" id="checkOutDate" name="checkOutDate" placeholder="Enter check-out date"><br>
+			
+			    <button type="submit">Submit</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

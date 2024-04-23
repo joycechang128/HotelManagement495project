@@ -10,12 +10,18 @@ package com.cmsc495.hotelmanagementapp.room;
  * 				...
  */
 
+import java.util.Date;
+import com.cmsc495.hotelmanagementapp.housekeeping.Housekeeping;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "room")
@@ -28,6 +34,26 @@ public class Room {
 	
 	@Column(name = "RoomNumber", nullable = false)
 	private int roomNumber;
+	
+	@Column(name = "RoomFloor")
+    private int roomFloor;
+    
+    @Column(name = "RoomType")
+    private String roomType;
+    
+    @Column(name = "Availability")
+    private boolean availability;
+    
+    @Column(name = "CleaningStatus")
+    private String cleaningStatus;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "LastCleaningDate")
+    private Date lastCleaningDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "HousekeepingID", referencedColumnName= "HousekeepingID")
+    private Housekeeping housekeeping;
 	
 	// constructor
 	public Room() {}

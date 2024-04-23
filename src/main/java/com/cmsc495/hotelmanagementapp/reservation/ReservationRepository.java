@@ -19,11 +19,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 	
-	List<Reservation> findAll();
-		
-	/*
+	Reservation save(Reservation reservation);
+	
 	// below @Query has the same function as "findReservationById(int reservationId)"
-	@Query("SELECT r FROM Reservation r WHERE r.reservationId = ?")
-	Optional<Reservation> findReservationById(int reservationId);
-	*/
+	// @Query("SELECT r FROM Reservation r WHERE r.reservationId = ?")
+	Optional<Reservation> findReservationByReservationId(int reservationId);
+	
+	List<Reservation> findAll();
+	
+	void deleteReservationByReservationId(int reservationId);
 }

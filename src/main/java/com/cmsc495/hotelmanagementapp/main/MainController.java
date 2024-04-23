@@ -21,13 +21,7 @@ public class MainController {
 	public String showMainPage() {
 		return "main";
 	}
-	
-	// The value="room" will map to the <a href="room"> tag in main.html -> the room management button
-	@GetMapping("/room")
-	public String roomPage() {
-		return "room";
-	}
-	
+		
 	// The value="customer" will map to the <a href="customer"> tag in main.html -> the customer management button
 	@GetMapping("/customer")
 	public String customerPage() {
@@ -52,4 +46,3 @@ public class MainController {
 		return "visualreport";
 	}
 }
-
