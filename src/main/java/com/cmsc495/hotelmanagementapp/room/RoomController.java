@@ -20,15 +20,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/rooms")
 public class RoomController {
 
     @Autowired
-    private final RoomService roomService;
+    private RoomService roomService;
 
+    /*
     @Autowired
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
-    }
+    }*/
 
     @GetMapping("/room")
     public String getAllRooms(Model model) {
@@ -43,12 +45,13 @@ public class RoomController {
         return ResponseEntity.ok(createdRoom);
     }
 
+    /*
     @PutMapping("/{roomId}")
     public ResponseEntity<Room> updateRoom(@PathVariable int roomId, @RequestBody Room room) {
         room.setRoomId(roomId);
         Room updatedRoom = roomService.updateRoom(room);
         return ResponseEntity.ok(updatedRoom);
-    }
+    }*/
 
     @DeleteMapping("/{roomId}")
     public ResponseEntity<Void> deleteRoom(@PathVariable int roomId) {

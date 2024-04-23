@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-19
+	Last Modified: 2024-04-22
 	Description: This HTML file represents the reservation page of the hotel management system,
 	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
@@ -110,7 +110,7 @@
 				<h1>Reservations</h1>
 				<div>
 					<input placeholder="customer">
-					<button class="create">+ Create</button>
+					<a th:href="@{/reservation/new}" class="create">+ Create</a>
 				</div>
 			</section>
 			<section class="table_body">
@@ -136,11 +136,15 @@
 							<td>
 								<p th:class="${reservation.billing.paymentStatus == 'Overdue' ? 'status overdue' :
              								reservation.billing.paymentStatus == 'Paid' ? 'status paid' :
-             								reservation.billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}"></p>
+             								reservation.billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
+             						<span th:text="${reservation.billing.paymentStatus == 'Overdue' ? 'Overdue' :
+                      							reservation.billing.paymentStatus == 'Paid' ? 'Paid' :
+                      							reservation.billing.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
+             					</p>
 							</td>
 							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+								<button th:href="@{'/edit/' + ${reservation.reservationId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+	                			<button th:href="@{'/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
 							</td>
 						</tr>
 					</tbody>

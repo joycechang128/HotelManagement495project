@@ -125,85 +125,38 @@
 					<thead>
 						<tr>
 							<th>id</th>
-							<th>Room Number</th>
-							<th>Floor</th>
-							<th>Room Type</th>
-							<th>Room Availability</th>
-							<th>Cleaning Status</th>
-							<th>Action</th>						
+                    		<th>Room Number</th>
+                    		<th>Floor</th>
+                    		<th>Room Type</th>
+                    		<th>Room Availability</th>
+                    		<th>Cleaning Status</th>
+                    		<th>Last Cleaning Date</th>
+                    		<th>Action</th>				
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="row">
-							<td>1</td>
-							<td>101</td>
-							<td>1</td>
-							<td>Double</td>
-							<td><i class="bx bx-check icon-true"></i></td>						
-							<td>
-								<p class="status prepared">Prepared</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>2</td>
-							<td>102</td>
-							<td>1</td>
-							<td>Double</td>
-							<td><i class="bx bx-check icon-true"></i></td>						
-							<td>
-								<p class="status prepared">Prepared</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>3</td>
-							<td>202</td>
-							<td>2</td>
-							<td>Triple</td>
-							<td><i class="bx bx-x icon-false"></i></td>						
-							<td>
-								<p class="status unprepared">Needs Cleaning</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>4</td>
-							<td>204</td>
-							<td>2</td>
-							<td>Twin</td>
-							<td><i class="bx bx-check icon-true"></i></td>						
-							<td>
-								<p class="status prepared">Prepared</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>5</td>
-							<td>301</td>
-							<td>3</td>
-							<td>Family</td>
-							<td><i class="bx bx-x icon-false"></i></td>						
-							<td>
-								<p class="status unprepared">Needs Cleaning</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
+						<tr th:each="room : ${rooms}" class="row">
+                    		<td th:text="${room.roomId}"></td>
+                    		<td th:text="${room.roomNumber}"></td>
+                    		<td th:text="${room.roomFloor}"></td>
+                    		<td th:text="${room.roomType}"></td>     
+                    		<td>
+                        		<i th:if="${room.availability == 'Available'}" class="bx bx-check icon-true"></i>
+    							<i th:if="${room.availability != 'Available'}" class="bx bx-x icon-false"></i>
+    							<p th:class="${room.availability == 'Available' ? 'status available' : 
+    							room.availability == 'Not Available' ? 'status unavailable' : ''}">
+                    		</td>         	
+                    		<td>
+                        		<p th:class="${room.cleaningStatus == 'Prepared' ? 'status prepared' : 
+                                    	room.cleaningStatus == 'Needs Cleaning' ? 'status unprepared' : ''}">
+                            		<span th:text="${room.cleaningStatus}"></span>
+                        		</p>
+                    		</td>            		        		
+                    		<td>
+                        		<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                        		<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+                    		</td>
+                		</tr>
 					</tbody>
 				</table>
 			</section>
