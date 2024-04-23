@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.main;
  * Package: com.cmsc495.hotelmanagementapp.main
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-03-28
- * Last Modified: 2024-04-03
+ * Last Modified: 2024-04-18
  * Description: This file contains the Java controller class for the Hotel Management System's main page (main.html), 
  * 				responsible for handling user requests and managing interactions with the main page.
  */
@@ -21,24 +21,12 @@ public class MainController {
 	public String showMainPage() {
 		return "main";
 	}
-	
-	// The value="room" will map to the <a href="room"> tag in main.html -> the room management button
-	@GetMapping("/room")
-	public String roomPage() {
-		return "room";
-	}
-	
+		
 	// The value="customer" will map to the <a href="customer"> tag in main.html -> the customer management button
 	@GetMapping("/customer")
 	public String customerPage() {
 		return "customer";
 	}
-	
-//	// The value="reservation" will map to the <a href="reservation"> tag in main.html -> the reservation management button
-//	@GetMapping("/reservation")
-//	public String reservationPage() {
-//		return "reservation";
-//	}
 	
 	// The value="billing" will map to the <a href="billing"> tag in main.html -> the billing management button
 	@GetMapping("/billing")
@@ -58,4 +46,3 @@ public class MainController {
 		return "visualreport";
 	}
 }
-

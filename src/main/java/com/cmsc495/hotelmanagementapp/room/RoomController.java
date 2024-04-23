@@ -5,25 +5,36 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
- * Last Modified: 2024-04-16
+ * Last Modified: 2024-04-22
  * Description: This file contains...
  * 				...
  */
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/rooms")
 public class RoomController {
 
+    @Autowired
     private final RoomService roomService;
 
     @Autowired
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
+    }
+
+    @GetMapping("/room")
+    public String getAllRooms(Model model) {
+        List<Room> rooms = roomService.getAllRooms();
+        model.addAttribute("rooms", rooms);
+        return "room";
     }
 
     @PostMapping
@@ -45,4 +56,3 @@ public class RoomController {
         return ResponseEntity.noContent().build();
     }
 }
-

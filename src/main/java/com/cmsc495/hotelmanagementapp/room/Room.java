@@ -5,22 +5,69 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
- * Last Modified: 2024-04-16
+ * Last Modified: 2024-04-22
  * Description: This file contains...
  * 				...
  */
 
-import java.sql.Timestamp;
+import java.util.Date;
 
+import com.cmsc495.hotelmanagementapp.housekeeping.Housekeeping;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name = "room")
 public class Room {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "RoomID")
     private int roomId;
+    
+    @Column(name = "RoomNumber", nullable = false)
     private int roomNumber;
+    
+    @Column(name = "RoomFloor")
     private int roomFloor;
+    
+    @Column(name = "RoomType")
     private String roomType;
+    
+    @Column(name = "Availability")
     private boolean availability;
+    
+    @Column(name = "CleaningStatus")
     private String cleaningStatus;
-    private Timestamp lastCleaningDate;
-    private int housekeepingId;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "LastCleaningDate")
+    private Date lastCleaningDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "HousekeepingID", referencedColumnName= "HousekeepingID")
+    private Housekeeping housekeeping;
+
+    public Room() {}
+
+    public Room(int roomNumber, int roomFloor, String roomType, boolean availability, String cleaningStatus, Date lastCleaningDate, Housekeeping housekeeping) {
+        super();
+        this.roomNumber = roomNumber;
+        this.roomFloor = roomFloor;
+        this.roomType = roomType;
+        this.availability = availability;
+        this.cleaningStatus = cleaningStatus;
+        this.lastCleaningDate = lastCleaningDate;
+        this.housekeeping = housekeeping;
+    }
 
     public int getRoomId() {
         return roomId;
@@ -70,19 +117,19 @@ public class Room {
         this.cleaningStatus = cleaningStatus;
     }
 
-    public Timestamp getLastCleaningDate() {
+    public Date getLastCleaningDate() {
         return lastCleaningDate;
     }
 
-    public void setLastCleaningDate(Timestamp lastCleaningDate) {
+    public void setLastCleaningDate(Date lastCleaningDate) {
         this.lastCleaningDate = lastCleaningDate;
     }
-
+    
     public int getHousekeepingId() {
-        return housekeepingId;
-    }
-
-    public void setHousekeepingId(int housekeepingId) {
-        this.housekeepingId = housekeepingId;
+		return housekeeping.getHousekeepingId();
+	}
+   
+    public Housekeeping getHousekeeping() {
+    	return housekeeping;
     }
 }
