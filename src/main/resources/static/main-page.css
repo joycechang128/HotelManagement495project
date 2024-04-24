@@ -392,12 +392,12 @@ input {
 
 .icon-true {
 	color: green;
-	font-size: 35px;
+	font-size: 30px;
     font-weight: bold;
 }
 
 .icon-false {
 	color: red;
-	font-size: 35px;
+	font-size: 30px;
     font-weight: bold;
 }
