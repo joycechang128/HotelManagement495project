@@ -20,19 +20,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/rooms")
+@RequestMapping("/room")
 public class RoomController {
 
     @Autowired
-    private RoomService roomService;
+    private final RoomService roomService;
 
-    /*
     @Autowired
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
-    }*/
+    }
 
-    @GetMapping("/room")
+    @GetMapping
     public String getAllRooms(Model model) {
         List<Room> rooms = roomService.getAllRooms();
         model.addAttribute("rooms", rooms);
@@ -45,13 +44,12 @@ public class RoomController {
         return ResponseEntity.ok(createdRoom);
     }
 
-    /*
     @PutMapping("/{roomId}")
     public ResponseEntity<Room> updateRoom(@PathVariable int roomId, @RequestBody Room room) {
         room.setRoomId(roomId);
         Room updatedRoom = roomService.updateRoom(room);
         return ResponseEntity.ok(updatedRoom);
-    }*/
+    }
 
     @DeleteMapping("/{roomId}")
     public ResponseEntity<Void> deleteRoom(@PathVariable int roomId) {
@@ -59,4 +57,5 @@ public class RoomController {
         return ResponseEntity.noContent().build();
     }
 }
+
 

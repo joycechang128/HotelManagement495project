@@ -31,24 +31,24 @@ import jakarta.persistence.TemporalType;
 @Table(name = "room")
 public class Room {
 
-	@Id													// primary key of the database table
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	// reservationId value is generated automatically by the database
-	@Column(name = "RoomID")
-	private int roomId;
-	
-	@Column(name = "RoomNumber", nullable = false)
-	private int roomNumber;
-	
-	@Column(name = "RoomFloor")
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "RoomID")
+    private int roomId;
+    
+    @Column(name = "RoomNumber", nullable = false)
+    private int roomNumber;
+    
+    @Column(name = "RoomFloor", nullable = false)
     private int roomFloor;
     
-    @Column(name = "RoomType")
+    @Column(name = "RoomType", nullable = false)
     private String roomType;
     
-    @Column(name = "Availability")
+    @Column(name = "Availability", nullable = false)
     private boolean availability;
     
-    @Column(name = "CleaningStatus")
+    @Column(name = "CleaningStatus", nullable = false)
     private String cleaningStatus;
     
     @Temporal(TemporalType.DATE)
@@ -58,21 +58,81 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "HousekeepingID", referencedColumnName= "HousekeepingID")
     private Housekeeping housekeeping;
-	
-	// constructor
-	public Room() {}
-	
-	public Room(int roomNumber) {
-		super();
-		this.roomNumber = roomNumber;
-	}
-	
-	public int getRoomId() {
-		return roomId;
-	}
-	
-	public int getRoomNumber() {
-		return roomNumber;
-	}
 
+    public Room() {}
+
+    public Room(int roomNumber, int roomFloor, String roomType, boolean availability, String cleaningStatus, Date lastCleaningDate, Housekeeping housekeeping) {
+        super();
+        this.roomNumber = roomNumber;
+        this.roomFloor = roomFloor;
+        this.roomType = roomType;
+        this.availability = availability;
+        this.cleaningStatus = cleaningStatus;
+        this.lastCleaningDate = lastCleaningDate;
+        this.housekeeping = housekeeping;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public int getRoomFloor() {
+        return roomFloor;
+    }
+
+    public void setRoomFloor(int roomFloor) {
+        this.roomFloor = roomFloor;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public String getCleaningStatus() {
+        return cleaningStatus;
+    }
+
+    public void setCleaningStatus(String cleaningStatus) {
+        this.cleaningStatus = cleaningStatus;
+    }
+
+    public Date getLastCleaningDate() {
+        return lastCleaningDate;
+    }
+
+    public void setLastCleaningDate(Date lastCleaningDate) {
+        this.lastCleaningDate = lastCleaningDate;
+    }
+    
+    public int getHousekeepingId() {
+		return housekeeping.getHousekeepingId();
+	}
+   
+    public Housekeeping getHousekeeping() {
+    	return housekeeping;
+    }
 }
