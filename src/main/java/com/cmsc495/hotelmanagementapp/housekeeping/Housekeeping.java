@@ -35,6 +35,11 @@ public class Housekeeping {
 	
 	public Housekeeping() {}
 	
+	public Housekeeping(List<Room> rooms) {
+		super();
+		this.rooms = rooms;
+	}
+
 	public int getHousekeepingId() {
 		return housekeepingId;
 	}

@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/room")
 public class RoomController {
 
     @Autowired
@@ -30,7 +31,7 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/room")
+    @GetMapping
     public String getAllRooms(Model model) {
         List<Room> rooms = roomService.getAllRooms();
         model.addAttribute("rooms", rooms);
@@ -57,3 +58,5 @@ public class RoomController {
         return ResponseEntity.noContent().build();
     }
 }
+
+
