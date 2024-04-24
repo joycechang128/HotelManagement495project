@@ -39,7 +39,7 @@ public class Housekeeping {
 		super();
 		this.rooms = rooms;
 	}
-	
+
 	public int getHousekeepingId() {
 		return housekeepingId;
 	}

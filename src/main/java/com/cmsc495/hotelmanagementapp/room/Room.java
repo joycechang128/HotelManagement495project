@@ -5,11 +5,7 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
-<<<<<<< HEAD
  * Last Modified: 2024-04-16
-=======
- * Last Modified: 2024-0x-xx
->>>>>>> ed85d6a (insert function v.1)
  * Description: This file contains...
  * 				...
  */

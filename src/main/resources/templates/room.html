@@ -1,15 +1,16 @@
 <!--
 	File: room.html
 	Path: src/main/resources/templates/room.html
-	Author: Chia-Yu(Joyce) Chang
+	Author: Chia-Yu(Joyce) Chang and Keita Alex Quirk-Arakaki
 	Created: 2024-03-28
-	Last Modified: 2024-04-14
+	Last Modified: 2024-04-23
 	Description: This HTML file represents the room page of the hotel management system,
 	             which facilitates the management of rooms, allowing users to add, delete, and modify rooms.
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	
 <head>
 	<title>Hotel Management Main Page with Sidebar Menu</title>
@@ -111,7 +112,7 @@
 			</div>
 		</div>
 		
-		<!-- below is the table structure-->
+		<!-- below is the table structure -->
 		<main class="table">
 			<section class="table_header">
 				<h1>Rooms</h1>
@@ -125,42 +126,42 @@
 					<thead>
 						<tr>
 							<th>id</th>
-                    		<th>Room Number</th>
-                    		<th>Floor</th>
-                    		<th>Room Type</th>
-                    		<th>Room Availability</th>
-                    		<th>Cleaning Status</th>
-                    		<th>Last Cleaning Date</th>
-                    		<th>Action</th>				
-						</tr>
+              <th>Room Number</th>
+              <th>Floor</th>
+              <th>Room Type</th>
+              <th>Room Availability</th>
+              <th>Cleaning Status</th>
+              <th>Last Cleaning Date</th>
+              <th>Action</th>				
+					  </tr>
 					</thead>
-					<tbody>
-						<tr th:each="room : ${rooms}" class="row">
-                    		<td th:text="${room.roomId}"></td>
-                    		<td th:text="${room.roomNumber}"></td>
-                    		<td th:text="${room.roomFloor}"></td>
-                    		<td th:text="${room.roomType}"></td>     
-                    		<td>
-                        		<i th:if="${room.availability == 'Available'}" class="bx bx-check icon-true"></i>
-    							<i th:if="${room.availability != 'Available'}" class="bx bx-x icon-false"></i>
-    							<p th:class="${room.availability == 'Available' ? 'status available' : 
-    							room.availability == 'Not Available' ? 'status unavailable' : ''}">
-                    		</td>         	
-                    		<td>
-                        		<p th:class="${room.cleaningStatus == 'Prepared' ? 'status prepared' : 
-                                    	room.cleaningStatus == 'Needs Cleaning' ? 'status unprepared' : ''}">
-                            		<span th:text="${room.cleaningStatus}"></span>
-                        		</p>
-                    		</td>            		        		
-                    		<td>
-                        		<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-                        		<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-                    		</td>
-                		</tr>
+				  <tbody>
+            <tr th:each="room : ${rooms}" class="row">
+              <td th:text="${room.roomId}"></td>
+              <td th:text="${room.roomNumber}"></td>
+              <td th:text="${room.roomFloor}"></td>
+              <td th:text="${room.roomType}"></td>     
+              <td>
+                <i th:if="${room.availability == 'Available'}" class="bx bx-check icon-true"></i>
+    					  <i th:if="${room.availability != 'Available'}" class="bx bx-x icon-false"></i>
+    						   <p th:class="${room.availability == 'Available' ? 'status available' : 
+    							                room.availability == 'Not Available' ? 'status unavailable' : ''}">
+              </td>         	
+              <td>
+                  <p th:class="${room.cleaningStatus == 'Prepared' ? 'status prepared' : 
+                            room.cleaningStatus == 'Needs Cleaning' ? 'status unprepared' : ''}">
+                      <span th:text="${room.cleaningStatus}"></span>
+                  </p>
+              </td>            		        		
+              <td>
+                  <button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+                  <button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+              </td>
+            </tr>
 					</tbody>
 				</table>
 			</section>
-		</main>
+    </main>
 	</div>
 </body>
 
