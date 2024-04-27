@@ -2,8 +2,8 @@ package com.cmsc495.hotelmanagementapp.customer;
 /*
  * File: CustomerRepository.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/customer/CustomerRepository.java
-  * Package: com.cmsc495.hotelmanagementapp.customer
- * Author: Mrigank Gupta, Chia-Yu(Joyce) Chang
+ * Package: com.cmsc495.hotelmanagementapp.customer
+ * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
  * Last Modified: 2024-04-27
  * Description: This repository interface provides methods for accessing and manipulating data in the database related to customers. 

@@ -3,7 +3,7 @@ package com.cmsc495.hotelmanagementapp.customer;
  * File: Customer.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/customer/Customer.java
  * Package: com.cmsc495.hotelmanagementapp.customer
- * Author: Mrigank Gupta, Chia-Yu(Joyce) Chang
+ * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
  * Last Modified: 2024-04-27 
  * Description: This file contains the entity class that represents the a hotel customer.
@@ -11,7 +11,6 @@ package com.cmsc495.hotelmanagementapp.customer;
  *              and associated reservation and billing details.
  */
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.annotations.Formula;
@@ -102,13 +101,13 @@ public class Customer {
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
-
-	public int getNumOfReservations() {
-        return numOfReservations;
-	}
 	
 	public List<Billing> getBillings() {
 		return billings;
+	}
+	
+	public int getNumOfReservations() {
+        return numOfReservations;
 	}
 	
 	public String getOverallPaymentStatus() {
