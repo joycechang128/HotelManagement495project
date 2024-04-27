@@ -30,7 +30,7 @@ import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "customer")
-public class Customer implements Serializable {
+public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
