@@ -3,7 +3,7 @@ package com.cmsc495.hotelmanagementapp.customer;
  * File: CustomerController.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/customer/CustomerController.java
  * Package: com.cmsc495.hotelmanagementapp.customer
- * Author: Mrigank Gupta, Chia-Yu(Joyce) Chang
+ * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
  * Last Modified: 2024-04-27 
  * Description: This controller manages the operations related to customers in the hotel customer system.
