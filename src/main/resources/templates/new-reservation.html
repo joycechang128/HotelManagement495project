@@ -15,16 +15,26 @@
     <meta charset="UTF-8">
     <title>New Reservation</title>
     <link rel="stylesheet" href="/create-page.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
 	<section>
 		<div class="create">
+			<!-- Go back to the prev page-->
+			<a href="javascript:history.go(-1)" class="goback-button">
+    			<i class="bx bx-arrow-back"></i> Go Back
+			</a>
 			<form action="/reservation/save" method="post">
 				<h1>New Reservation</h1>
+				
+				<p class="hint">If the customer does not exist, please <a href="/customer/new">add a new customer</a></p>
 			    <label for="customerName">Customer Name:</label>
-			    <input type="text" id="customerName" name="customerName" placeholder="Enter customer name"><br>
-			
+			    <select id="customerName" name="customerName">
+			        <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:text="${customer.customerName}"></option>
+			    </select><br>
+				
+				<p class="hint">If the room does not exist, please <a href="/room/new">add a new room</a></p>
 			    <label for="roomNumber">Room Number:</label>
 			    <select id="roomNumber" name="roomNumber">
 			        <option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomNumber}"></option>

@@ -31,20 +31,20 @@ import jakarta.persistence.TemporalType;
 public class Reservation {
 	
 	@Id													// primary key of the database table
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	// reservationId value is generated automatically by the database
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	// reservationId value is generated automatically by the database
 	@Column(name = "ReservationID")
 	private int reservationId;
 	
 	@ManyToOne
-	@JoinColumn(name="CustomerID", referencedColumnName="CustomerID")
+	@JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID")
 	private Customer customer;
 	
 	@OneToOne
-	@JoinColumn(name="RoomID", referencedColumnName="RoomID")
+	@JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
 	private Room room;
 	
 	@OneToOne
-	@JoinColumn(name="BillingID", referencedColumnName="BillingID")
+	@JoinColumn(name = "BillingID", referencedColumnName = "BillingID")
 	private Billing billing;
 	
 	@Temporal(TemporalType.DATE)

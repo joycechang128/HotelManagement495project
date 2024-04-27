@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cmsc495.hotelmanagementapp.customer.Customer;
+import com.cmsc495.hotelmanagementapp.customer.CustomerService;
 import com.cmsc495.hotelmanagementapp.room.Room;
 import com.cmsc495.hotelmanagementapp.room.RoomService;
 
@@ -30,11 +32,13 @@ public class ReservationController {
 	private ReservationService reservationService;
 	
 	@Autowired
+	private CustomerService customerService;
+	
+	@Autowired
     private RoomService roomService;
 	
 	/* The value="reservation" will map to the <a href="reservation"> tag in html -> the reservation management button 
-	 * This method retrieves reservations data from the database and stores in the model for rendering in the view
-	 */
+	 * This method retrieves reservations data from the database and stores in the model for rendering in the view */
 	@GetMapping("/reservation")
 	public String getAllReservations(Model model) {
 		List<Reservation> reservations = reservationService.getAllReservations();
@@ -42,17 +46,21 @@ public class ReservationController {
 		return "reservation";
 	}
 	
-	/* Method to display new-reservation.html, the form to input data for new reservation */
+	/* Method to display new-reservation.html, the form to input data for new reservation.
+	 * Retrieve customers and rooms data for data selection */
 	@GetMapping("/reservation/new")
 	public String showCreateReservationForm(Model model) {
 		Reservation reservation = new Reservation();
-		//List<Room> rooms = roomService.getAllRooms();
+		// to display customers & rooms selection
+		List<Customer> customers = customerService.getAllCustomersSortedByNames();
+		List<Room> rooms = roomService.getAllRooms();
 		model.addAttribute("reservation", reservation);
-		//model.addAttribute("rooms", rooms);
+		model.addAttribute("customers", customers);
+		model.addAttribute("rooms", rooms);
 		return "new-reservation";
 	}
 	
-	/* Method to save new reservation after new data has been input into reservation-new.html */
+	/* Method to save new reservation after new data has been input into new-reservation.html */
 	@PostMapping("/save")
 	public String saveReservation(@ModelAttribute("reservation") Reservation reservation) {
 		reservationService.makeReservation(reservation);
