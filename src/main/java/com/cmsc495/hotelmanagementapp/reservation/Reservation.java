@@ -73,6 +73,10 @@ public class Reservation {
 		return reservationId;
 	}
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+	
 	public int getCustomerId() {
 		return customer.getCustomerId();
 	}
@@ -89,10 +93,22 @@ public class Reservation {
 		return room.getRoomNumber();
 	}
 	
+	public Billing getBilling() {
+		return billing;
+	}
+	
+	public int getBillingId() {
+		return billing.getBillingId();
+	}
+	
+	public String getPaymentStatus() {
+		return billing.getPaymentStatus();
+	}
+	
 	public Date getCheckInDate() {
 		return checkInDate;
 	}
-	
+
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
@@ -103,9 +119,5 @@ public class Reservation {
 	
 	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
-	}
-	
-	public Billing getBilling() {
-		return billing;
 	}
 }
