@@ -3,13 +3,14 @@
 	Path: src/main/resources/templates/billing.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-14
+	Last Modified: 2024-04-29
 	Description: This HTML file represents the billing page of the hotel management system,
 	             which facilitates the management of billings, allowing users to add, delete, and modify billings.
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	
 <head>
 	<title>Hotel Management Main Page with Sidebar Menu</title>
@@ -136,70 +137,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="row">
-							<td>1</td>
-							<td>Kash Bentley</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
-							<td><strong>85.80</strong></td>
+						<tr th:each="billing: ${billings}" class="row">
+							<td th:text="${billing.billingId}"></td>
+							<td th:text="${billing.customerName}"></td>
+							<td th:text="${billing.checkInDate}"></td>
+							<td th:text="${billing.checkOutDate}"></td>
+							<td><strong th:text="${billing.amount}"></strong></td>
 							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>2</td>
-							<td>Danny Whitehead</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td><strong>99.99</strong></td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>3</td>
-							<td>Oakley Brooks</td>
-							<td>2 April, 2024</td>
-							<td>4 April, 2024</td>
-							<td><strong>150.3</strong></td>
-							<td>
-								<p class="status paid">Paid</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>4</td>
-							<td>Sage Hudson</td>
-							<td>16 March, 2024</td>
-							<td>1 April, 2024</td>
-							<td><strong>140.2</strong></td>
-							<td>
-								<p class="status overdue">Overdue</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-						<tr class="row">
-							<td>5</td>
-							<td>Forrest Manning</td>
-							<td>29 March, 2024</td>
-							<td>3 April, 2024</td>
-							<td><strong>203.56</strong></td>
-							<td>
-								<p class="status unpaid">Unpaid</p>
+								<p th:class="${billing.paymentStatus == 'Overdue' ? 'status overdue' :
+             								billing.paymentStatus == 'Paid' ? 'status paid' :
+             								billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
+             						<span th:text="${billing.paymentStatus == 'Overdue' ? 'Overdue' :
+                      							billing.paymentStatus == 'Paid' ? 'Paid' :
+                      							billing.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
+             					</p>
 							</td>
 							<td>
 								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>

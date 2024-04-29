@@ -3,15 +3,19 @@ package com.cmsc495.hotelmanagementapp.billing;
  * File: Billing.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/billing/Billing.java
  * Package: com.cmsc495.hotelmanagementapp.billing
- * Author: Bryce Campbell
+ * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-0x-xx
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-04-29 
+ * Description: This file contains the entity class that represents the a hotel customer's billing.
+ *              It contains information such as billing id, payment status, 
+ *              and associated customer and reservation details.
  */
+
+import java.util.Date;
 
 import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.reservation.Reservation;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,35 +25,37 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "billing")
 public class Billing {
 	
-	@Id													// primary key of the database table
-	@GeneratedValue(strategy=GenerationType.IDENTITY)	// reservationId value is generated automatically by the database
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BillingID")
 	private int billingId;
 	
-	@OneToOne
-	@JoinColumn(name="ReservationID", referencedColumnName="ReservationID")
+	@ManyToOne
+	@JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID")
+	private Customer customer;
+	
+	@OneToOne(mappedBy = "billing")
 	private Reservation reservation;
 	
-	@ManyToOne
-	@JoinColumn(name="CustomerID", referencedColumnName="CustomerID")
-	private Customer customer;
+	@Transient
+	private double amount;
 	
 	@Column(name = "PaymentStatus", nullable = false)
 	private String paymentStatus;
 	
-	
 	// constructor
 	public Billing() {}
 
-	public Billing(Reservation reservation, Customer customer, String paymentStatus) {
+	public Billing(Customer customer, Reservation reservation, String paymentStatus) {
 		super();
-		this.reservation = reservation;
 		this.customer = customer;
+		this.reservation = reservation;
 		this.paymentStatus = paymentStatus;
 	}
 
@@ -57,8 +63,37 @@ public class Billing {
 		return billingId;
 	}
 	
+	public Customer getCustomer() {
+		return customer;
+	}
+	
+	public String getCustomerName() {
+		return customer.getCustomerName();
+	}
+	
+	public Reservation getReservation() {
+		return reservation;
+	}
+	
+	public Date getCheckInDate() {
+		return reservation.getCheckInDate();
+	}
+	
+	public Date getCheckOutDate() {
+		return reservation.getCheckOutDate();
+	}
+	
+	public double getAmount() {
+		BillingService billingService = new BillingService();
+		amount = billingService.getCalculatedAmount(this.reservation);
+		return amount;
+	}
+	
 	public String getPaymentStatus() {
 		return paymentStatus;
 	}
 
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 }
