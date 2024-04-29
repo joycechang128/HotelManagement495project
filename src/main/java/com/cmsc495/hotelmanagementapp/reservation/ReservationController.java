@@ -5,9 +5,10 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-19
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-04-29 
+ * Description: This controller manages the operations related to reservations in the hotel reservation system.
+ *              It provides mappings for creating, updating, and deleting reservation data of customers, 
+ *              as well as retrieving information about all reservation.
  */
 
 import java.util.List;

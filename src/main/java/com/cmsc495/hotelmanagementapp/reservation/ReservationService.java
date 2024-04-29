@@ -5,9 +5,9 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-19
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-04-29 
+ * Description: This service class contains business logic operations related to reservations in the hotel management system.  
+ *              It provides methods for handling CRUD operations on reservation data, as well as additional business logics.
  */
 
 import java.util.List;

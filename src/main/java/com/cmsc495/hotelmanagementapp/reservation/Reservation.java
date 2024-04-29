@@ -5,9 +5,10 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-19
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-04-29 
+ * Description: This file contains the entity class that represents the a hotel customer's reservation.
+ *              It contains information such as check-in & check-out date, 
+ *              and associated customer, room, and billing details.
  */
 
 import java.util.Date;
@@ -83,6 +84,10 @@ public class Reservation {
 	
 	public String getCustomerName() {
 		return customer.getCustomerName();
+	}
+	
+	public Room getRoom() {
+		return room;
 	}
 	
 	public int getRoomId() {

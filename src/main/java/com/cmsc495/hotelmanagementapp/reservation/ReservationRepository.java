@@ -5,15 +5,14 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-19
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-04-29
+ * Description: This repository interface provides methods for accessing and manipulating data in the database related to reservations. 
+ *              It defines CRUD operations for reservation entities, allowing interaction with the underlying data store.
  */
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

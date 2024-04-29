@@ -12,7 +12,6 @@
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-	
 <head>
 	<title>Hotel Management Main Page with Sidebar Menu</title>
 	<link rel="stylesheet" href="/main-page.css">
@@ -134,12 +133,12 @@
 							<td th:text="${reservation.checkInDate}"></td>
 							<td th:text="${reservation.checkOutDate}"></td>
 							<td>
-								<p th:class="${reservation.billing.paymentStatus == 'Overdue' ? 'status overdue' :
-             								reservation.billing.paymentStatus == 'Paid' ? 'status paid' :
-             								reservation.billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
-             						<span th:text="${reservation.billing.paymentStatus == 'Overdue' ? 'Overdue' :
-                      							reservation.billing.paymentStatus == 'Paid' ? 'Paid' :
-                      							reservation.billing.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
+								<p th:class="${reservation.paymentStatus == 'Overdue' ? 'status overdue' :
+             								reservation.paymentStatus == 'Paid' ? 'status paid' :
+             								reservation.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
+             						<span th:text="${reservation.paymentStatus == 'Overdue' ? 'Overdue' :
+                      							reservation.paymentStatus == 'Paid' ? 'Paid' :
+                      							reservation.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
              					</p>
 							</td>
 							<td>
