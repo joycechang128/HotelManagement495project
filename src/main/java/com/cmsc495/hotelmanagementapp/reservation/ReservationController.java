@@ -66,7 +66,7 @@ public class ReservationController {
 		List<Customer> customers = customerService.getAllCustomersSortedByNames();
 		List<Room> rooms = roomService.getAllRooms();
 		
-		// Initialize available dates map
+		// Initialize available dates list
 		List<LocalDate> availableCheckInDates = new ArrayList<>();
 		List<LocalDate> availableCheckOutDates = new ArrayList<>();
 	    
@@ -74,7 +74,7 @@ public class ReservationController {
 		if (roomNumber != null) {
 			availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
 		}
-	    // If a check-in date is selected, fetch available check-out dates based on check-in date
+		// If a check-in date is selected, fetch available check-out dates based on check-in date
 		if (checkInDate != null) {
 			LocalDate localCheckInDate = Instant.ofEpochMilli(checkInDate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 			availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, localCheckInDate);
@@ -111,12 +111,21 @@ public class ReservationController {
 		return ResponseEntity.ok(availableCheckOutDates);
 	}
 	
-	/* Method to save new reservation after new data has been input into new-reservation.html
+	/* Method to save new reservation after new data has been input into new-reservation.html */
 	@PostMapping("/save")
-	public String saveReservation(@ModelAttribute("reservation") Reservation reservation) {
-		reservationService.makeReservation(reservation);
+	public String saveReservation(@ModelAttribute("reservation") Reservation reservation,
+			@RequestParam("customerName") String customerName, @RequestParam("roomNumber") int roomId,
+			@RequestParam("checkInDate") Date checkInDate, @RequestParam("checkOutDate") Date checkOutDate) {
+		Customer customer = customer.getCustomerByName(customerName);
+	    Room room = roomService.getRoomByNumber(roomNumber);
+	    
+	    reservation.setCustomer(customer);
+	    reservation.setRoom(room);
+	    reservation.setCheckInDate(checkInDate);
+	    reservation.setCheckOutDate(checkOutDate);
+		reservationService.createReservation(reservation);
 		return "redirect:/reservation";
-	}*/
+	}
 	
 	/* Method to edit reservation, opening edit-reservation.html */
 	@GetMapping("/edit/{reservationId}")

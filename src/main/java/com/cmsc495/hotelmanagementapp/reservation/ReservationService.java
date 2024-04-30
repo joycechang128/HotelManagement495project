@@ -114,7 +114,7 @@ public class ReservationService {
 		reservationRepository.save(reservation);
 	}
 	
-	public void makeReservation(Reservation reservation) {
+	public void createReservation(Reservation reservation) {
 		reservationRepository.save(reservation);
 	}
 	
