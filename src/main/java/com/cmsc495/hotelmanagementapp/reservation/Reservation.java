@@ -31,7 +31,7 @@ import jakarta.persistence.TemporalType;
 @Table(name = "reservation")
 public class Reservation {
 	
-	@Id													// primary key of the database table
+	@Id	// primary key of the database table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	// reservationId value is generated automatically by the database
 	@Column(name = "ReservationID")
 	private int reservationId;
@@ -50,11 +50,11 @@ public class Reservation {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckInDate", nullable = false)
-    private Date checkInDate;
+	private Date checkInDate;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckOutDate", nullable = false)
-    private Date checkOutDate;
+	private Date checkOutDate;
 
 	/* constructor, reservationId is not required because it is generated automatically by the database */
 	public Reservation() {
