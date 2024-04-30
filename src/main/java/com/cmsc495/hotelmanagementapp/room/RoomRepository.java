@@ -17,6 +17,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     Room save(Room room);
 
     Room findById(int roomId);
+    
+    Room findByRoomNumber(int roomNumber);
 
     List<Room> findAll();
 
