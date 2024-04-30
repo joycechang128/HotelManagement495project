@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-29 
+ * Last Modified: 2024-04-30
  * Description: This file contains the entity class that represents the a hotel customer's reservation.
  *              It contains information such as check-in & check-out date, 
  *              and associated customer, room, and billing details.
@@ -124,5 +124,11 @@ public class Reservation {
 	
 	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
+	}
+	
+	// the method for debugging
+	@Override
+	public String toString() {
+	    return "Reservation ID: " + reservationId + ", Customer ID: " + customer.getCustomerId() + ", Room ID: " + room.getRoomId() + ", Check-In Date: " + checkInDate + ", Check-Out Date: " + checkOutDate + ", Billing ID: " + billing.getBillingId();
 	}
 }
