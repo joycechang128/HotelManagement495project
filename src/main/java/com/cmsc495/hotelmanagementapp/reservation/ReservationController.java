@@ -45,7 +45,7 @@ public class ReservationController {
 	private CustomerService customerService;
 	
 	@Autowired
-    private RoomService roomService;
+	private RoomService roomService;
 	
 	/* The value="reservation" will map to the <a href="reservation"> tag in html -> the reservation management button 
 	 * This method retrieves reservations data from the database and stores in the model for rendering in the view */
@@ -67,27 +67,25 @@ public class ReservationController {
 		List<Room> rooms = roomService.getAllRooms();
 		
 		// Initialize available dates map
-	    List<LocalDate> availableCheckInDates = new ArrayList<>();
-	    List<LocalDate> availableCheckOutDates = new ArrayList<>();
+		List<LocalDate> availableCheckInDates = new ArrayList<>();
+		List<LocalDate> availableCheckOutDates = new ArrayList<>();
 	    
-	    // If a room is selected, fetch available check-in dates for that room
-	    if (roomNumber != null) {
-	    	availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
-	    }
-	    
-	    
+		// If a room is selected, fetch available check-in dates for that room
+		if (roomNumber != null) {
+			availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
+		}
 	    // If a check-in date is selected, fetch available check-out dates based on check-in date
-	    if (checkInDate != null) {
-            LocalDate localCheckInDate = Instant.ofEpochMilli(checkInDate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-	        availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, localCheckInDate);
-	    }
+		if (checkInDate != null) {
+			LocalDate localCheckInDate = Instant.ofEpochMilli(checkInDate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+			availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, localCheckInDate);
+		}
 	    
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("customers", customers);
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("roomNumber", roomNumber);
-	    model.addAttribute("availableCheckInDates", availableCheckInDates);
-	    model.addAttribute("availableCheckOutDates", availableCheckOutDates);
+		model.addAttribute("availableCheckInDates", availableCheckInDates);
+		model.addAttribute("availableCheckOutDates", availableCheckOutDates);
 	    
 		return "new-reservation";
 	}
@@ -98,8 +96,8 @@ public class ReservationController {
 	 * return A ResponseEntity containing a list of LocalDate objects representing available check-in dates. */
 	@GetMapping("/getAvailableCheckInDates")
 	public ResponseEntity<List<LocalDate>> getAvailableCheckInDates(@RequestParam("roomNumber") Integer roomNumber) {
-	    List<LocalDate> availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
-	    return ResponseEntity.ok(availableCheckInDates);
+		List<LocalDate> availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
+		return ResponseEntity.ok(availableCheckInDates);
 	}
 	
 	/* This method retrieves a list of available check-out dates for the specified room,
@@ -110,7 +108,7 @@ public class ReservationController {
 	@GetMapping("/getAvailableCheckOutDates")
 	public ResponseEntity<List<LocalDate>> getAvailableCheckOutDates(@RequestParam("roomNumber") Integer roomNumber, @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate) {
 		List<LocalDate> availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, checkInDate);
-	    return ResponseEntity.ok(availableCheckOutDates);
+		return ResponseEntity.ok(availableCheckOutDates);
 	}
 	
 	/* Method to save new reservation after new data has been input into new-reservation.html

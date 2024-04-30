@@ -59,9 +59,11 @@
 		</div>
 	</section>
 	
+	<!-- JavaScript for selection -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 	    $(document).ready(function() {
+			// Event handler for room number selection change
 	        $('#roomNumber').change(function() {
 	            var roomNumber = $(this).val();
             	// Check if a room is selected
@@ -84,6 +86,7 @@
 	            }
 	        });
 	        
+	        // Event handler for check-in date selection change
 	        $('#checkInDate').change(function() {
 			    var roomNumber = $('#roomNumber').val();
 			    var checkInDate = $(this).val();
