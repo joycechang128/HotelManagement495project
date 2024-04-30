@@ -5,23 +5,17 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
- * Last Modified: 2024-04-16
+ * Last Modified: 2024-04-30
  * Description: This file contains...
  * 				...
  */
 
-import java.util.Date;
-import com.cmsc495.hotelmanagementapp.housekeeping.Housekeeping;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "room")
@@ -46,26 +40,16 @@ public class Room {
     
     @Column(name = "CleaningStatus", nullable = false)
     private String cleaningStatus;
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "LastCleaningDate")
-    private Date lastCleaningDate;
-    
-    @ManyToOne
-    @JoinColumn(name = "HousekeepingID", referencedColumnName= "HousekeepingID")
-    private Housekeeping housekeeping;
-
+   
     public Room() {}
 
-    public Room(int roomNumber, int roomFloor, String roomType, boolean availability, String cleaningStatus, Date lastCleaningDate, Housekeeping housekeeping) {
+    public Room(int roomNumber, int roomFloor, String roomType, boolean availability, String cleaningStatus) {
         super();
         this.roomNumber = roomNumber;
         this.roomFloor = roomFloor;
         this.roomType = roomType;
         this.availability = availability;
         this.cleaningStatus = cleaningStatus;
-        this.lastCleaningDate = lastCleaningDate;
-        this.housekeeping = housekeeping;
     }
 
     public int getRoomId() {
@@ -115,20 +99,5 @@ public class Room {
     public void setCleaningStatus(String cleaningStatus) {
         this.cleaningStatus = cleaningStatus;
     }
-
-    public Date getLastCleaningDate() {
-        return lastCleaningDate;
-    }
-
-    public void setLastCleaningDate(Date lastCleaningDate) {
-        this.lastCleaningDate = lastCleaningDate;
-    }
     
-    public int getHousekeepingId() {
-		return housekeeping.getHousekeepingId();
-	}
-   
-    public Housekeeping getHousekeeping() {
-    	return housekeeping;
-    }
 }
