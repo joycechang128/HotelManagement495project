@@ -15,6 +15,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.cmsc495.hotelmanagementapp.room.Room;
+
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 	
@@ -25,6 +27,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	Optional<Reservation> findReservationByReservationId(int reservationId);
 	
 	List<Reservation> findAll();
+	
+	List<Reservation> findByRoom(Room room);
 	
 	void deleteReservationByReservationId(int reservationId);
 }
