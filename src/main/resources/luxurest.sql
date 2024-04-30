@@ -22,74 +22,51 @@ VALUES
 ('Foster Hebert', 'foster@gmail.com', '345-678-9012'),
 ('Rory Hale', 'rory@gmail.com', '901-234-5678');
 
-CREATE TABLE housekeeping (
-    HousekeepingID INT PRIMARY KEY AUTO_INCREMENT,
-    HousekeeperName VARCHAR(255),
-    ContactInfo VARCHAR(255),
-    Shift VARCHAR(255)
-);
-
-INSERT INTO housekeeping (HousekeeperName, ContactInfo, Shift)
-VALUES 
-('Rowen Meyers', 'rowen.meyers@gmail.com', 'Night'),
-('Eliseo Villegas', 'eliseo.villegas@gmail.com', 'Day'),
-('Justice Shelton', 'justice.shelton@gmail.com', 'Afternoon'),
-('Arian Kelley', 'arian.kelley@gmail.com', 'Night'),
-('Karsyn Robinson', 'karsyn.robinson@gmail.com', 'Day'),
-('Giuliana Medrano', 'giuliana.medrano@gmail.com', 'Afternoon'),
-('Arielle Gentry', 'arielle.gentry@gmail.com', 'Night'),
-('Bonnie Lara', 'bonnie.lara@gmail.com', 'Day'),
-('Noelle Ryan', 'noelle.ryan@gmail.com', 'Afternoon'),
-('Amira Rangel', 'amira.rangel@gmail.com', 'Night');
-
 CREATE TABLE room (
     RoomID INT AUTO_INCREMENT PRIMARY KEY,
     RoomNumber INT NOT NULL,
     RoomFloor INT NOT NULL,
     RoomType VARCHAR(255),
     Availability BOOLEAN,
-    CleaningStatus VARCHAR(255),
-    LastCleaningDate DATE,
-    HousekeepingID INT,
-    FOREIGN KEY (HousekeepingID) REFERENCES Housekeeping(HousekeepingID)
+    CleaningStatus VARCHAR(255)
 );
 
-INSERT INTO room (RoomNumber, RoomFloor, RoomType, Availability, CleaningStatus, LastCleaningDate, HousekeepingID)
+INSERT INTO room (RoomNumber, RoomFloor, RoomType, Availability, CleaningStatus)
 VALUES 
-(101, 1, 'Single', false, 'Prepared', '2024-04-06 09:00:00', 2),
-(102, 1, 'Double', true, 'Needs Cleaning', '2024-04-07 10:00:00', 2),
-(103, 1, 'Single', true, 'Prepared', '2024-04-19 11:00:00', 4),
-(201, 2, 'Double', false, 'Prepared', '2024-04-08 12:00:00', 3),
-(202, 2, 'Triple', false, 'Needs Cleaning', '2024-04-09 13:00:00', 5),
-(203, 2, 'Family', true, 'Prepared', '2024-04-07 14:00:00', 8),
-(301, 3, 'Single', false, 'Needs Cleaning', '2024-04-11 15:00:00', 10),
-(302, 3, 'Double', true, 'Prepared', '2024-04-06 16:00:00', 8),
-(303, 3, 'Triple', false, 'Prepared', '2024-04-08 17:00:00', 1),
-(304, 3, 'Family', true, 'Needs Cleaning', '2024-04-06 18:00:00', 9);
+(101, 1, 'Single', false, 'Prepared'),
+(102, 1, 'Double', true, 'Needs Cleaning'),
+(103, 1, 'Single', true, 'Prepared'),
+(201, 2, 'Double', false, 'Prepared'),
+(202, 2, 'Triple', false, 'Needs Cleaning'),
+(203, 2, 'Family', true, 'Prepared'),
+(301, 3, 'Single', false, 'Needs Cleaning'),
+(302, 3, 'Double', true, 'Prepared'),
+(303, 3, 'Triple', false, 'Prepared'),
+(304, 3, 'Family', true, 'Needs Cleaning');
 
 SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE billing (
-    BillingID INT PRIMARY KEY,
+    BillingID INT PRIMARY KEY AUTO_INCREMENT,
     ReservationID INT,
     CustomerID INT,
     PaymentStatus VARCHAR(255),
-    FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationId),
-    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerId)
+    FOREIGN KEY (ReservationID) REFERENCES Reservation(ReservationID),
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 );
 
-INSERT INTO billing (BillingID, ReservationID, CustomerID, PaymentStatus)
+INSERT INTO billing (ReservationID, CustomerID, PaymentStatus)
 VALUES
-(1, 1, 5, 'Paid'),
-(2, 2, 3, 'Overdue'),
-(3, 3, 10, 'Paid'),
-(4, 4, 4, 'Overdue'),
-(5, 5, 2, 'Unpaid'),
-(6, 6, 15, 'Unpaid'),
-(7, 7, 20, 'Unpaid'),
-(8, 8, 10, 'Overdue'),
-(9, 9, 22, 'Paid'),
-(10, 10, 25, 'Overdue');
+(1, 5, 'Paid'),
+(2, 3, 'Overdue'),
+(3, 10, 'Paid'),
+(4, 4, 'Overdue'),
+(5, 2, 'Unpaid'),
+(6, 9, 'Unpaid'),
+(7, 1, 'Unpaid'),
+(8, 10, 'Overdue'),
+(9, 6, 'Paid'),
+(10, 7, 'Overdue');
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -105,15 +82,15 @@ CREATE TABLE reservation (
     FOREIGN KEY (BillingID) REFERENCES Billing(BillingID)
 );
 
-INSERT INTO Reservation (CustomerID, RoomID, CheckInDate, CheckOutDate, BillingID)
-VALUES (1, 3, '2024-04-15', '2024-04-18', 1),
-       (2, 5, '2024-04-20', '2024-04-25', 2),
-       (3, 6, '2024-05-01', '2024-05-05', 3),
-       (4, 7, '2024-05-10', '2024-05-15', 4),
-       (5, 8, '2024-05-20', '2024-05-25', 5),
-       (6, 10, '2024-05-30', '2024-06-05', 6),
-       (7, 1, '2024-06-10', '2024-06-15', 7),
-       (8, 2, '2024-06-20', '2024-06-25', 8),
-       (9, 4, '2024-06-30', '2024-07-05', 9),
-       (10, 9, '2024-07-10', '2024-07-15', 10);
-       
+INSERT INTO reservation (CustomerID, RoomID, CheckInDate, CheckOutDate, BillingID)
+VALUES 
+(5, 3, '2024-06-15', '2024-06-18', 1),
+(3, 5, '2024-06-20', '2024-06-25', 2),
+(10, 6, '2024-06-21', '2024-06-25', 3),
+(4, 7, '2024-06-22', '2024-06-27', 4),
+(2, 8, '2024-06-25', '2024-06-30', 5),
+(9, 10, '2024-06-28', '2024-07-03', 6),
+(1, 1, '2024-06-30', '2024-07-05', 7),
+(10, 2, '2024-07-01', '2024-07-08', 8),
+(6, 4, '2024-07-05', '2024-07-10', 9),
+(7, 9, '2024-06-10', '2024-06-20', 10);

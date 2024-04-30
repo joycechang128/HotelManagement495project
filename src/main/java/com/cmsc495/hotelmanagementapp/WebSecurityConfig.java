@@ -29,7 +29,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
             .authorizeRequests()								// require authentication to access these pages
                 .requestMatchers("/main", "/room/**", "/customer/**", "/reservation/**",
-                		"/billing/**", "/housekeeping/**", "/visualreport", "/").authenticated()
+                		"/billing/**", "/visualreport", "/").authenticated()
                 .anyRequest().permitAll()						// allow access to all other pages
                 .and()
             .formLogin()
