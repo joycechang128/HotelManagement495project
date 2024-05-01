@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-30 
+ * Last Modified: 2024-05-01
  * Description: This service class contains business logic operations related to reservations in the hotel management system.  
  *              It provides methods for handling CRUD operations on reservation data, as well as additional business logics.
  */
@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import com.cmsc495.hotelmanagementapp.room.Room;
 import com.cmsc495.hotelmanagementapp.room.RoomRepository;
+
+import jakarta.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,13 +112,16 @@ public class ReservationService {
 		return availableDates;
 	}
 	
-	public void save(Reservation reservation) {
+	/* This method creates a new reservation record in a system */
+	public void createReservation(Reservation reservation) {
 		reservationRepository.save(reservation);
 	}
 	
-	public void makeReservation(Reservation reservation) {
-		reservationRepository.save(reservation);
-	}
+	/* This method updates a reservation record in a system */
+	@Transactional
+	public Reservation updateReservation(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
 	
 	public Optional<Reservation> findReservationById(int reservationId) {
 		return reservationRepository.findReservationByReservationId(reservationId);
