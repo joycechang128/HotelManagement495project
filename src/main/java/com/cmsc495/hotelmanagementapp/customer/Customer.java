@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.customer;
  * Package: com.cmsc495.hotelmanagementapp.customer
  * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
- * Last Modified: 2024-04-27 
+ * Last Modified: 2024-05-01
  * Description: This file contains the entity class that represents the a hotel customer.
  *              It contains information such as customer id, name, email, phone number, 
  *              and associated reservation and billing details.
@@ -72,6 +72,10 @@ public class Customer {
 
 	public int getCustomerId() {
 		return customerId;
+	}
+	
+	public int setCustomerId(int customerId) {
+		return this.customerId = customerId;
 	}
 
 	public String getCustomerName() {

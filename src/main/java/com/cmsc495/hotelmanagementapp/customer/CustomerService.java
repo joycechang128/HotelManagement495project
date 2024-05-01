@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.customer;
  * Package: com.cmsc495.hotelmanagementapp.customer
  * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
- * Last Modified: 2024-04-27
+ * Last Modified: 2024-05-01
  * Description: This service class contains business logic operations related to customers in the hotel management system.  
  *              It provides methods for handling CRUD operations on customer data, as well as additional business logics.
  */
@@ -26,6 +26,10 @@ public class CustomerService {
 	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
 	}
+	
+	public Customer findCustomerById(int customerId) {
+        return customerRepository.findCustomerByCustomerId(customerId);
+    }
 	
 	/* This method is for displaying sorted customer list: by ascending first name */
 	public List<Customer> getAllCustomersSortedByNames() {

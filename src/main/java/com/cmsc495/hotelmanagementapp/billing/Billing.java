@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.billing;
  * Package: com.cmsc495.hotelmanagementapp.billing
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-29 
+ * Last Modified: 2024-05-01 
  * Description: This file contains the entity class that represents the a hotel customer's billing.
  *              It contains information such as billing id, payment status, 
  *              and associated customer and reservation details.
@@ -63,8 +63,16 @@ public class Billing {
 		return billingId;
 	}
 	
+	public void setBillingId(int billingId) {
+		this.billingId = billingId;
+	}
+
 	public Customer getCustomer() {
 		return customer;
+	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 	public String getCustomerName() {
@@ -73,6 +81,14 @@ public class Billing {
 	
 	public Reservation getReservation() {
 		return reservation;
+	}
+	
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
+	
+	public void setReservationId(int reservationId) {
+		this.reservation.setReservationId(reservationId);;
 	}
 	
 	public Date getCheckInDate() {

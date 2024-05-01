@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.billing;
  * Package: com.cmsc495.hotelmanagementapp.billing
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-29
+ * Last Modified: 2024-05-01
  * Description: This service class contains business logic operations related to billings in the hotel management system.  
  *              It provides methods for handling CRUD operations on billing data, as well as additional business logics.
  */
@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cmsc495.hotelmanagementapp.reservation.Reservation;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class BillingService {
@@ -59,4 +61,16 @@ public class BillingService {
 	    
 		return amount;
 	}
+	
+	/* This method creates a new billing record in a system.
+	 * The payment status will typically be set to "unpaid" for new billing records */
+	public void createBilling(Billing billing) {
+		billingRepository.save(billing);
+	}
+	
+	/* This method updates a billing record in a system */
+	@Transactional
+    public void updateBilling(Billing billing) {
+        billingRepository.save(billing);
+    }
 }

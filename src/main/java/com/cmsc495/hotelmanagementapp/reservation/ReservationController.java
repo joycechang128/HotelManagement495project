@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-04-30 
+ * Last Modified: 2024-05-01
  * Description: This controller manages the operations related to reservations in the hotel reservation system.
  *              It provides mappings for creating, updating, and deleting reservation data of customers, 
  *              as well as retrieving information about all reservation.
@@ -34,6 +34,11 @@ import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.customer.CustomerService;
 import com.cmsc495.hotelmanagementapp.room.Room;
 import com.cmsc495.hotelmanagementapp.room.RoomService;
+import com.cmsc495.hotelmanagementapp.billing.Billing;
+import com.cmsc495.hotelmanagementapp.billing.BillingService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class ReservationController {
@@ -46,6 +51,9 @@ public class ReservationController {
 	
 	@Autowired
 	private RoomService roomService;
+	
+	@Autowired
+	private BillingService billingService;
 	
 	/* The value="reservation" will map to the <a href="reservation"> tag in html -> the reservation management button 
 	 * This method retrieves reservations data from the database and stores in the model for rendering in the view */
@@ -93,10 +101,10 @@ public class ReservationController {
 	/* This method retrieves a list of available check-in dates for the specified room,
 	 * to populate the selection of check-in dates in the frontend.
 	 * @param roomNumber The ID of the room for which available check-in dates are to be retrieved
-	 * return A ResponseEntity containing a list of LocalDate objects representing available check-in dates. */
+	 * return a ResponseEntity containing a list of LocalDate objects representing available check-in dates. */
 	@GetMapping("/getAvailableCheckInDates")
-	public ResponseEntity<List<LocalDate>> getAvailableCheckInDates(@RequestParam("roomNumber") Integer roomNumber) {
-		List<LocalDate> availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
+	public ResponseEntity<List<LocalDate>> getAvailableCheckInDates(@RequestParam("roomNumber") Integer roomId) {
+		List<LocalDate> availableCheckInDates = reservationService.findAvailableDatesForRoom(roomId, true, null);
 		return ResponseEntity.ok(availableCheckInDates);
 	}
 	
@@ -104,26 +112,50 @@ public class ReservationController {
 	 * to populate the selection of check-out dates based on the selected check-in date in the frontend.
 	 * @param roomNumber The ID of the room for which available check-in dates are to be retrieved
 	 * @param checkInDate The selected check-in date for which available check-out dates are to be retrieved
-	 * return A ResponseEntity containing a list of LocalDate objects representing available check-out dates. */
+	 * return a ResponseEntity containing a list of LocalDate objects representing available check-out dates. */
 	@GetMapping("/getAvailableCheckOutDates")
-	public ResponseEntity<List<LocalDate>> getAvailableCheckOutDates(@RequestParam("roomNumber") Integer roomNumber, @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate) {
-		List<LocalDate> availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, checkInDate);
+	public ResponseEntity<List<LocalDate>> getAvailableCheckOutDates(@RequestParam("roomNumber") Integer roomId, @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate) {
+		List<LocalDate> availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomId, false, checkInDate);
 		return ResponseEntity.ok(availableCheckOutDates);
 	}
 	
-	/* Method to save new reservation after new data has been input into new-reservation.html */
-	@PostMapping("/save")
+	/* This method is responsible for saving a new reservation into the system.
+	 * It retrieves customer and room data based on the input in new-reservation.html,
+	 * creates a new reservation & associated billing, and redirects the user to the reservation page.
+	 * return a redirection to the reservation page. */
+	@PostMapping("/reservation/save")
 	public String saveReservation(@ModelAttribute("reservation") Reservation reservation,
-			@RequestParam("customerName") String customerName, @RequestParam("roomNumber") int roomId,
-			@RequestParam("checkInDate") Date checkInDate, @RequestParam("checkOutDate") Date checkOutDate) {
-		Customer customer = customer.getCustomerByName(customerName);
-	    Room room = roomService.getRoomByNumber(roomNumber);
+			@RequestParam("customerName") Integer customerId, @RequestParam("roomNumber") Integer roomId,
+			@RequestParam("checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkInDate, 
+			@RequestParam("checkOutDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOutDate) {
+		// for debugging
+	    Logger logger = LoggerFactory.getLogger(ReservationController.class);
+	    logger.info("create page customerId recieved: " +customerId);
+	    logger.info("create page roomId recieved: " +roomId);
+
+		// Find customer and room data based on inputs
+		Customer customer = customerService.findCustomerById(customerId);
+	    Room room = roomService.getRoomById(roomId);
 	    
-	    reservation.setCustomer(customer);
-	    reservation.setRoom(room);
-	    reservation.setCheckInDate(checkInDate);
-	    reservation.setCheckOutDate(checkOutDate);
+	    // Set reservation details
+	    reservation = new Reservation(customer, room, null, checkInDate, checkOutDate);
+	    // Set CustomerID and RoomID in Reservation
+	    reservation.setCustomerId(customer.getCustomerId());
+	    reservation.setRoomId(room.getRoomId());
+	    // Create and save a reservation
 		reservationService.createReservation(reservation);
+		
+		// Automatically create a corresponding billing, set payment status to unpaid when initially created
+	    Billing billing = new Billing(customer, null, "Unpaid");
+	    billingService.createBilling(billing);
+	    
+	    // Update Reservation's BillingID, can only be set after creating reservation
+	    reservation.setBilling(billing);
+	    reservationService.updateReservation(reservation);
+	    // Update Billing's ReservationID, can only be set after creating billing
+	    billing.setReservation(reservation);
+	    billingService.updateBilling(billing);
+		
 		return "redirect:/reservation";
 	}
 	

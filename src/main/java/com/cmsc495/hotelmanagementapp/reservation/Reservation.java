@@ -12,6 +12,9 @@ package com.cmsc495.hotelmanagementapp.reservation;
  */
 
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.cmsc495.hotelmanagementapp.billing.Billing;
 import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.room.Room;
@@ -39,7 +42,7 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID")
 	private Customer customer;
-	
+
 	@OneToOne
 	@JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
 	private Room room;
@@ -48,10 +51,12 @@ public class Reservation {
 	@JoinColumn(name = "BillingID", referencedColumnName = "BillingID")
 	private Billing billing;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckInDate", nullable = false)
 	private Date checkInDate;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckOutDate", nullable = false)
 	private Date checkOutDate;
@@ -74,12 +79,24 @@ public class Reservation {
 		return reservationId;
 	}
 	
+	public void setReservationId(int reservationId) {
+		this.reservationId = reservationId;
+	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
 	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
 	public int getCustomerId() {
 		return customer.getCustomerId();
+	}
+	
+	public void setCustomerId(int customerId) {
+		this.customer.setCustomerId(customerId);
 	}
 	
 	public String getCustomerName() {
@@ -89,9 +106,17 @@ public class Reservation {
 	public Room getRoom() {
 		return room;
 	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 	
 	public int getRoomId() {
 		return room.getRoomId();
+	}
+	
+	public void setRoomId(int roomId) {
+		this.room.setRoomId(roomId);
 	}
 	
 	public int getRoomNumber() {
@@ -102,8 +127,16 @@ public class Reservation {
 		return billing;
 	}
 	
+	public void setBilling(Billing billing) {
+		this.billing = billing;
+	}
+	
 	public int getBillingId() {
 		return billing.getBillingId();
+	}
+	
+	public void setBillingId(int billingId) {
+		this.billing.setBillingId(billingId);
 	}
 	
 	public String getPaymentStatus() {
