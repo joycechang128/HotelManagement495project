@@ -12,10 +12,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	
 <head>
-    <meta charset="UTF-8">
-    <title>New Reservation</title>
-    <link rel="stylesheet" href="/create-page.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<meta charset="UTF-8">
+	<title>New Reservation</title>
+	<link rel="stylesheet" href="/create-page.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -54,7 +54,7 @@
 					<option th:each="date : ${availableCheckOutDates}" th:value="${date}" th:text="${date}"></option>
 				</select><br>
 			
-			    <button type="submit">Submit</button>
+				<button type="submit">Submit</button>
 			</form>
 		</div>
 	</section>
@@ -62,52 +62,52 @@
 	<!-- JavaScript for selection -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	    $(document).ready(function() {
+		$(document).ready(function() {
 			// Event handler for room number selection change
-	        $('#roomNumber').change(function() {
-	            var roomNumber = $(this).val();
-            	// Check if a room is selected
-	            if (roomNumber) {
-                	// Send an Ajax request to retrieve available check-in dates
-	                $.get('/getAvailableCheckInDates?roomNumber=' + roomNumber, function(data) {
-	                    var checkInDateSelect = $('#checkInDate');
-	                    checkInDateSelect.empty();
-	                    checkInDateSelect.append('<option value="">Please select a check-in date</option>');
-                    	// Add available check-in dates to the dropdown list
-	                    $.each(data, function(index, date) {
-	                        checkInDateSelect.append('<option value="' + date + '">' + date + '</option>');
-	                    });
-                    	// Enable the check-in date dropdown list
-	                    checkInDateSelect.prop('disabled', false);
-	                });
-	            } else {
-                	// If no room is selected, clear the check-in date dropdown list and disable it
-	                $('#checkInDate').empty().prop('disabled', true);
-	            }
-	        });
+			$('#roomNumber').change(function() {
+				var roomNumber = $(this).val();
+				// Check if a room is selected
+				if (roomNumber) {
+					// Send an Ajax request to retrieve available check-in dates
+					$.get('/getAvailableCheckInDates?roomNumber=' + roomNumber, function(data) {
+						var checkInDateSelect = $('#checkInDate');
+						checkInDateSelect.empty();
+						checkInDateSelect.append('<option value="">Please select a check-in date</option>');
+						// Add available check-in dates to the dropdown list
+						$.each(data, function(index, date) {
+							checkInDateSelect.append('<option value="' + date + '">' + date + '</option>');
+						});
+						// Enable the check-in date dropdown list
+						checkInDateSelect.prop('disabled', false);
+					});
+				} else {
+					// If no room is selected, clear the check-in date dropdown list and disable it
+					$('#checkInDate').empty().prop('disabled', true);
+				}
+			});
 	        
 	        // Event handler for check-in date selection change
 	        $('#checkInDate').change(function() {
-			    var roomNumber = $('#roomNumber').val();
-			    var checkInDate = $(this).val();
-			    if (checkInDate) {
+				var roomNumber = $('#roomNumber').val();
+				var checkInDate = $(this).val();
+				if (checkInDate) {
 					// Send an Ajax request to retrieve available check-out dates based on the selected check-in date
-			        $.get('/getAvailableCheckOutDates?roomNumber=' + roomNumber + '&checkInDate=' + checkInDate, function(data) {
-			            var checkOutDateSelect = $('#checkOutDate');
-			            checkOutDateSelect.empty();
-			            checkOutDateSelect.append('<option value="">Please select a check-out date</option>');
-			            // Add available check-out dates to the dropdown list
-			            $.each(data, function(index, date) {
-			                checkOutDateSelect.append('<option value="' + date + '">' + date + '</option>');
-			            });
-			            // Enable the check-out date dropdown list
-			            checkOutDateSelect.prop('disabled', false);
-			        });
-			    } else {
-			        $('#checkOutDate').empty().prop('disabled', true);
-			    }
+					$.get('/getAvailableCheckOutDates?roomNumber=' + roomNumber + '&checkInDate=' + checkInDate, function(data) {
+						var checkOutDateSelect = $('#checkOutDate');
+						checkOutDateSelect.empty();
+						checkOutDateSelect.append('<option value="">Please select a check-out date</option>');
+						// Add available check-out dates to the dropdown list
+						$.each(data, function(index, date) {
+							checkOutDateSelect.append('<option value="' + date + '">' + date + '</option>');
+						});
+						// Enable the check-out date dropdown list
+						checkOutDateSelect.prop('disabled', false);
+					});
+				} else {
+					$('#checkOutDate').empty().prop('disabled', true);
+				}
 			});
-	    });
+		});
 	</script>
 </body>
 </html>

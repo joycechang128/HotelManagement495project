@@ -21,8 +21,8 @@ body {
 	background-size: cover;
 	background-position: center;
 	display: grid;
-    grid-template-columns: 290px auto;
-    overflow: hidden;
+	grid-template-columns: 290px auto;
+	overflow: hidden;
 }
 
 /*
@@ -69,9 +69,9 @@ body {
 }
 
 .sidebar .list .category.logout {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
 }
 
 .list .category {
@@ -111,10 +111,10 @@ body {
 
 .container {
 	grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
 }
 
 /*
@@ -125,28 +125,28 @@ body {
 	position: relative;
 	width: 85%;	
 	max-width: 1200px;
-    margin: 20px auto 30px;
-    border-radius: .8rem;
-    display: grid;
-    gap: 20px;
-    height: 10vh;
+	margin: 20px auto 30px;
+	border-radius: .8rem;
+	display: grid;
+	gap: 20px;
+	height: 10vh;
 }
 
 .stat-card-1 {
 	width: 35%;
-    grid-template-columns: repeat(1, 1fr);
+	grid-template-columns: repeat(1, 1fr);
 }
 
 .stat-card-3 {
-    grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 }
 
 .stat-card-4 {
-    grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .stat-card-5 {
-    grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 }
 
 .stat-card .card {
@@ -184,28 +184,28 @@ body {
 .main {
 	flex: 1;
 	display: flex;
-    justify-content: center;
-    align-items: center; 
+	justify-content: center;
+	align-items: center; 
 }
 
 .table {
-    width: 85%;
-    margin: 30px auto 20px;
-    height: calc(100% - 130px);
-    background-color: #fff5;
-    backdrop-filter: blur(7px);
-    box-shadow: 0 .4rem .8rem #0005;
-    border-radius: .8rem;
-    overflow: hidden;
-    flex: 1;
+	width: 85%;
+	margin: 30px auto 20px;
+	height: calc(100% - 130px);
+	background-color: #fff5;
+	backdrop-filter: blur(7px);
+	box-shadow: 0 .4rem .8rem #0005;
+	border-radius: .8rem;
+	overflow: hidden;
+	flex: 1;
 }
 
 .table th, .table td {
-    border-collapse: collapse;
-    padding: 1rem;
-    text-align: left;
-    white-space: nowrap;
-    overflow: auto;
+	border-collapse: collapse;
+	padding: 1rem;
+	text-align: left;
+	white-space: nowrap;
+	overflow: auto;
 }
 
 .table_header {
@@ -251,7 +251,7 @@ a {
 }
 
 .create:hover {
-    background-color: lightgreen;
+	background-color: lightgreen;
 }
 
 input {
@@ -301,7 +301,7 @@ input {
 }
 
 .table tbody .row {
-    line-height: 10px;
+	line-height: 10px;
 }
 
 .table tbody .row:nth-child(even) {
@@ -331,7 +331,7 @@ input {
 }
 
 .edit-btn:hover {
-    background-color: skyblue;
+	background-color: skyblue;
 }
 
 .delete-btn {
@@ -393,11 +393,11 @@ input {
 .icon-true {
 	color: green;
 	font-size: 30px;
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .icon-false {
 	color: red;
 	font-size: 30px;
-    font-weight: bold;
+	font-weight: bold;
 }
