@@ -112,10 +112,10 @@
 								<p th:class="${customer.overallPaymentStatus == 'Overdue' ? 'status overdue' :
              								customer.overallPaymentStatus == 'Paid' ? 'status paid' :
              								customer.overallPaymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
-             						<span th:text="${customer.overallPaymentStatus == 'Overdue' ? 'Overdue' :
+									<span th:text="${customer.overallPaymentStatus == 'Overdue' ? 'Overdue' :
                       							customer.overallPaymentStatus == 'Paid' ? 'Paid' :
                       							customer.overallPaymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
-                      			</p>
+								</p>
 							</td>
 							<td>
 								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>

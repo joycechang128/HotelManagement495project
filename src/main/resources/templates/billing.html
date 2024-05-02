@@ -139,10 +139,10 @@
 								<p th:class="${billing.paymentStatus == 'Overdue' ? 'status overdue' :
              								billing.paymentStatus == 'Paid' ? 'status paid' :
              								billing.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
-             						<span th:text="${billing.paymentStatus == 'Overdue' ? 'Overdue' :
+									<span th:text="${billing.paymentStatus == 'Overdue' ? 'Overdue' :
                       							billing.paymentStatus == 'Paid' ? 'Paid' :
                       							billing.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
-                      			</p>
+								</p>
 							</td>
 							<td>
 								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>

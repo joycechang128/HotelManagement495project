@@ -130,14 +130,14 @@
 								<p th:class="${reservation.paymentStatus == 'Overdue' ? 'status overdue' :
              								reservation.paymentStatus == 'Paid' ? 'status paid' :
              								reservation.paymentStatus == 'Unpaid' ? 'status unpaid' : ''}">
-             						<span th:text="${reservation.paymentStatus == 'Overdue' ? 'Overdue' :
+									<span th:text="${reservation.paymentStatus == 'Overdue' ? 'Overdue' :
                       							reservation.paymentStatus == 'Paid' ? 'Paid' :
                       							reservation.paymentStatus == 'Unpaid' ? 'Unpaid' : ''}"></span>
-                      			</p>
+								</p>
 							</td>
 							<td>
 								<button th:href="@{'/edit/' + ${reservation.reservationId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-	                			<button th:href="@{'/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+								<button th:href="@{'/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
 							</td>
 						</tr>
 					</tbody>
