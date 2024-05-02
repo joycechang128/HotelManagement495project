@@ -87,10 +87,6 @@ public class Billing {
 		this.reservation = reservation;
 	}
 	
-	public void setReservationId(int reservationId) {
-		this.reservation.setReservationId(reservationId);;
-	}
-	
 	public Date getCheckInDate() {
 		return reservation.getCheckInDate();
 	}

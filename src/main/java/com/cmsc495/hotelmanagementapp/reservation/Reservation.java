@@ -135,10 +135,6 @@ public class Reservation {
 		return billing.getBillingId();
 	}
 	
-	public void setBillingId(int billingId) {
-		this.billing.setBillingId(billingId);
-	}
-	
 	public String getPaymentStatus() {
 		return billing.getPaymentStatus();
 	}

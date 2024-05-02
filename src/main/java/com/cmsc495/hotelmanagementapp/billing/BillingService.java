@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.billing;
  * Package: com.cmsc495.hotelmanagementapp.billing
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-01
+ * Last Modified: 2024-05-02
  * Description: This service class contains business logic operations related to billings in the hotel management system.  
  *              It provides methods for handling CRUD operations on billing data, as well as additional business logics.
  */
@@ -41,10 +41,10 @@ public class BillingService {
 		/* Calculate days interval for reserved days,
 		 * convert java.sql.Date to java.util.Date in order to display accurately */
 		Date checkInDate = new Date(reservation.getCheckInDate().getTime());
-	    Date checkOutDate = new Date(reservation.getCheckOutDate().getTime());
-	    long reservedDays = ChronoUnit.DAYS.between(checkInDate.toInstant(), checkOutDate.toInstant());
+		Date checkOutDate = new Date(reservation.getCheckOutDate().getTime());
+		long reservedDays = ChronoUnit.DAYS.between(checkInDate.toInstant(), checkOutDate.toInstant());
 	    
-	    // calculate amount based on room type and check-in/check-out date
+		// calculate amount based on room type and check-in/check-out date
 		if (roomType.equals("Single")) {
 			amount = 145.8 * reservedDays;
 		} else if (roomType.equals("Double")) {
@@ -56,8 +56,8 @@ public class BillingService {
 		}
 		
 		// Format the amount to two decimal places
-	    DecimalFormat df = new DecimalFormat("#.##");
-	    amount = Double.parseDouble(df.format(amount));
+		DecimalFormat df = new DecimalFormat("#.##");
+		amount = Double.parseDouble(df.format(amount));
 	    
 		return amount;
 	}
@@ -70,7 +70,7 @@ public class BillingService {
 	
 	/* This method updates a billing record in a system */
 	@Transactional
-    public void updateBilling(Billing billing) {
-        billingRepository.save(billing);
-    }
+	public Billing updateBilling(Billing billing) {
+		return billingRepository.save(billing);
+	}
 }
