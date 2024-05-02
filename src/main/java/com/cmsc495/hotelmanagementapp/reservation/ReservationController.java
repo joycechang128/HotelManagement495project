@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-01
+ * Last Modified: 2024-05-02
  * Description: This controller manages the operations related to reservations in the hotel reservation system.
  *              It provides mappings for creating, updating, and deleting reservation data of customers, 
  *              as well as retrieving information about all reservation.
@@ -128,33 +128,30 @@ public class ReservationController {
 			@RequestParam("customerName") Integer customerId, @RequestParam("roomNumber") Integer roomId,
 			@RequestParam("checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkInDate, 
 			@RequestParam("checkOutDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOutDate) {
-		// for debugging
-	    Logger logger = LoggerFactory.getLogger(ReservationController.class);
-	    logger.info("create page customerId recieved: " +customerId);
-	    logger.info("create page roomId recieved: " +roomId);
+		// for debugging, showing the customerId & roomId retrieved
+		Logger logger = LoggerFactory.getLogger(ReservationController.class);
+		logger.info("create page customerId recieved: " + customerId);
+		logger.info("create page roomId recieved: " + roomId);
 
 		// Find customer and room data based on inputs
 		Customer customer = customerService.findCustomerById(customerId);
-	    Room room = roomService.getRoomById(roomId);
+		Room room = roomService.getRoomById(roomId);
 	    
-	    // Set reservation details
-	    reservation = new Reservation(customer, room, null, checkInDate, checkOutDate);
-	    // Set CustomerID and RoomID in Reservation
-	    reservation.setCustomerId(customer.getCustomerId());
-	    reservation.setRoomId(room.getRoomId());
-	    // Create and save a reservation
+		// Set reservation details
+		reservation = new Reservation(customer, room, null, checkInDate, checkOutDate);
+		// Create and save a reservation
 		reservationService.createReservation(reservation);
 		
 		// Automatically create a corresponding billing, set payment status to unpaid when initially created
-	    Billing billing = new Billing(customer, null, "Unpaid");
-	    billingService.createBilling(billing);
+		Billing billing = new Billing(customer, null, "Unpaid");
+		billingService.createBilling(billing);
 	    
-	    // Update Reservation's BillingID, can only be set after creating reservation
-	    reservation.setBilling(billing);
-	    reservationService.updateReservation(reservation);
-	    // Update Billing's ReservationID, can only be set after creating billing
-	    billing.setReservation(reservation);
-	    billingService.updateBilling(billing);
+		// Update Reservation's BillingID, can only be set after creating reservation
+		reservation.setBilling(billing);
+		reservationService.updateReservation(reservation);
+		// Update Billing's ReservationID, can only be set after creating billing
+		billing.setReservation(reservation);
+		billingService.updateBilling(billing);
 		
 		return "redirect:/reservation";
 	}

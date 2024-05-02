@@ -120,8 +120,8 @@ public class ReservationService {
 	/* This method updates a reservation record in a system */
 	@Transactional
 	public Reservation updateReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
-    }
+		return reservationRepository.save(reservation);
+	}
 	
 	public Optional<Reservation> findReservationById(int reservationId) {
 		return reservationRepository.findReservationByReservationId(reservationId);
