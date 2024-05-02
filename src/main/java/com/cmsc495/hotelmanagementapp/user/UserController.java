@@ -34,19 +34,18 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String showMainPage(@RequestParam String username, @RequestParam String password) {
-        try {
-        	// Attempt to authenticate using the provided username and password
-            UserDetails userDetails = service.loadUserByUsername(username);
-            // If authentication succeeds, redirect to the main page
-            /* Using "redirect:" allows the browser to perform a new GET request rather than 
-			 * just redirecting to the /login page while keeping the URL as /main
-			 */
-            return "redirect:/main";
-        } catch (UsernameNotFoundException e) {
-        	// If authentication fails, redirect back to the login page
-            return "redirect:/login";
-        }
-    }
+		try {
+			// Attempt to authenticate using the provided username and password
+			UserDetails userDetails = service.loadUserByUsername(username);
+			// If authentication succeeds, redirect to the main page
+			/* Using "redirect:" allows the browser to perform a new GET request rather than
+			 * just redirecting to the /login page while keeping the URL as /main */
+			return "redirect:/main";
+		} catch (UsernameNotFoundException e) {
+			// If authentication fails, redirect back to the login page
+			return "redirect:/login";
+		}
+	}
 	
 	// The value="logout" will map to the <a href="logout"> tag in main.html -> the logout button in main page
 	@GetMapping("/logout")

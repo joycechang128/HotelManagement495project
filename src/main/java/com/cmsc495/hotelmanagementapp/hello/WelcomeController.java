@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WelcomeController {
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String helloWorld()
-    {
-        return "Welcome to LuxuRest management system, please add /login to your URL to login";
-    }
+	@RequestMapping("/hello")
+	@ResponseBody
+	public String helloWorld() {
+		return "Welcome to LuxuRest management system, please add /login to your URL to login";
+	}
 }
 

@@ -24,38 +24,38 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-            .authorizeRequests()								// require authentication to access these pages
-                .requestMatchers("/main", "/room/**", "/customer/**", "/reservation/**",
-                		"/billing/**", "/visualreport", "/").authenticated()
-                .anyRequest().permitAll()						// allow access to all other pages
-                .and()
-            .formLogin()
-                .loginPage("/login")							// specify a custom login page
-                .defaultSuccessUrl("/main")						// redirect to the main page after successful login
-                // redirect the user back to the loginPage with an error message
-                .failureHandler(authenticationFailureHandler())	// handle authentication failure
-                .permitAll();									// allow access to the login page
-// The code below is equivalent to the showLogoutPage() method in UserController.java, either one works
-//                .and()
-//            .logout()
-//                .logoutSuccessUrl("/login")					// redirect to the login page after logout
-//                .permitAll();									// allow access to the logout functionality
-        return http.build();
-    }
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+			.authorizeRequests()								// require authentication to access these pages
+				.requestMatchers("/main", "/room/**", "/customer/**", "/reservation/**",
+						"/billing/**", "/visualreport", "/").authenticated()
+				.anyRequest().permitAll()						// allow access to all other pages
+				.and()
+			.formLogin()
+				.loginPage("/login")							// specify a custom login page
+				.defaultSuccessUrl("/main")						// redirect to the main page after successful login
+				// redirect the user back to the loginPage with an error message
+				.failureHandler(authenticationFailureHandler())	// handle authentication failure
+				.permitAll();									// allow access to the login page
+				// The code below is equivalent to the showLogoutPage() method in UserController.java, either one works
+				// .and()
+					// .logout()
+					// .logoutSuccessUrl("/login")					// redirect to the login page after logout
+					// .permitAll();									// allow access to the logout functionality
+		return http.build();
+	}
     
-    // the method is used to configure password encoding in Spring Security
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-    	// use NoOpPasswordEncoder to disable password encoding
-        return NoOpPasswordEncoder.getInstance();
-    }
+	// the method is used to configure password encoding in Spring Security
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		// use NoOpPasswordEncoder to disable password encoding
+		return NoOpPasswordEncoder.getInstance();
+	}
     
-    // the method for handling authentication failure
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new SimpleUrlAuthenticationFailureHandler("/login?error=true");
-    }
+	// the method for handling authentication failure
+	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		return new SimpleUrlAuthenticationFailureHandler("/login?error=true");
+	}
 }

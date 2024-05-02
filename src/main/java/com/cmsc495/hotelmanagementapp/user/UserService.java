@@ -19,20 +19,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 	/* Implementing the UserDetailsService interface allows UserService to provide user details 
-	 * required for authentication and authorization processes, ensuring compatibility with 
-	 * Spring Security configurations.
-	 */
+	 * required for authentication and authorization processes, ensuring compatibility with Spring Security configurations. */
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-	    // check if the username="admin"
-	    if ("admin".equals(username)) {
-	    	// Return user details of the username and password
-	        return User.withUsername("admin")
-	                   .password("password")
-	                   .build();
-	    } else {
-	    	throw new UsernameNotFoundException("User not found with username: " + username);
-	    }
+		// check if the username="admin"
+		if ("admin".equals(username)) {
+			// Return user details of the username and password
+			return User.withUsername("admin")
+					.password("password")
+					.build();
+		} else {
+			throw new UsernameNotFoundException("User not found with username: " + username);
+		}
 	}
 }
