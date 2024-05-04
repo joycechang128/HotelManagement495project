@@ -166,10 +166,6 @@ public class Reservation {
 	public int getTotalNumOfReservations() {
 		return totalNumOfReservations;
 	}
-
-	public void setTotalNumOfReservations(int totalNumOfReservations) {
-		this.totalNumOfReservations = totalNumOfReservations;
-	}
 	
 	public int getTotalNumOfCustomers() {
 		return totalNumOfCustomers;

@@ -77,9 +77,9 @@ public class ReservationController {
 		
 		// Displaying summary in the reservation page
 		int totalNumOfReservations = reservationRepository.countAllReservations();
-	    int totalNumOfCustomers = customerRepository.countAllCustomers();
-	    model.addAttribute("totalNumOfReservations", totalNumOfReservations);
-	    model.addAttribute("totalNumOfCustomers", totalNumOfCustomers);
+		int totalNumOfCustomers = customerRepository.countAllCustomers();
+		model.addAttribute("totalNumOfReservations", totalNumOfReservations);
+		model.addAttribute("totalNumOfCustomers", totalNumOfCustomers);
 		return "reservation";
 	}
 	
@@ -297,6 +297,6 @@ public class ReservationController {
 			Logger logger = LoggerFactory.getLogger(ReservationController.class);
 			logger.error("Failed to delete reservation with ID: " + reservationId, e);
 			return "redirect:/reservation?error=Failed+to+delete+reservation.";
-	    }
+		}
 	}
 }

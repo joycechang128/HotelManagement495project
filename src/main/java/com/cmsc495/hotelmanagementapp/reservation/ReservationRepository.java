@@ -34,5 +34,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	void deleteReservationByReservationId(int reservationId);
 	
 	@Query("SELECT COUNT(r) FROM Reservation r")
-    int countAllReservations();
+	int countAllReservations();
 }
