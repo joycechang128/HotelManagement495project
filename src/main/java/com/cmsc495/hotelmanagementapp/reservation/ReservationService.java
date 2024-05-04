@@ -60,7 +60,7 @@ public class ReservationService {
 		for (Reservation reservation : reservations) {
 			reservationDetails.append(reservation.toString()).append("\n");
 		}
-		logger.info("Reservations for room {}: {}", roomId, reservationDetails.toString());
+		logger.info("\nReservations for room {}: \n{}", roomId, reservationDetails.toString());
         
 		// Iterate over each day within the next two months
 		LocalDate today = LocalDate.now();

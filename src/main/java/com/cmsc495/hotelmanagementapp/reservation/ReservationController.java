@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-02
+ * Last Modified: 2024-05-03
  * Description: This controller manages the operations related to reservations in the hotel reservation system.
  *              It provides mappings for creating, updating, and deleting reservation data of customers, 
  *              as well as retrieving information about all reservation.
@@ -14,6 +14,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.customer.CustomerService;
@@ -67,7 +69,8 @@ public class ReservationController {
 	/* Method to display new-reservation.html, the form to input data for new reservation.
 	 * Retrieve customers and rooms data for data selection */
 	@GetMapping("/reservation/new")
-	public String showCreateReservationForm(@RequestParam(name = "roomNumber", required = false) Integer roomNumber, @RequestParam(name = "checkInDate", required = false) Date checkInDate, Model model) {
+	public String showCreateReservationForm(@RequestParam(name = "roomNumber", required = false) Integer roomNumber, 
+			@RequestParam(name = "checkInDate", required = false) Date checkInDate, Model model) {
 		Reservation reservation = new Reservation();
 		
 		// to display customers & rooms selection
@@ -153,18 +156,99 @@ public class ReservationController {
 		billing.setReservation(reservation);
 		billingService.updateBilling(billing);
 		
-		return "redirect:/reservation";
+		return "redirect:/reservation?message=The+reservation+has+been+created+successfully!" + 
+				"+Reservation+ID%3A+" + reservation.getReservationId() +
+		        ",+Billing+ID%3A+" + reservation.getBilling().getBillingId();
 	}
 	
 	/* Method to edit reservation, opening edit-reservation.html */
-	@GetMapping("/edit/{reservationId}")
-	public ModelAndView showEditReservationPage(@PathVariable(name="reservationId") int reservationId) {
-		ModelAndView editReservation = new ModelAndView("edit-reservation");
+	@GetMapping("/reservation/edit/{reservationId}")
+	public String showEditReservationPage(@PathVariable("reservationId") int reservationId,
+			@RequestParam(name = "roomNumber", required = false) Integer roomNumber,
+			@RequestParam(name = "checkInDate", required = false) Date checkInDate, 
+			@RequestParam(name = "checkOutDate", required = false) Date checkOutDate, 
+			Model model) {
+		// Retrieve the existing reservation by ID
 		Reservation reservation = reservationService.findReservationById(reservationId).orElse(null);
-		editReservation.addObject("reservation", reservation);
-		return editReservation;
+		
+		// Retrieve all rooms for selection
+		List<Room> rooms = roomService.getAllRooms();
+		// Initialize available dates list
+		List<LocalDate> availableCheckInDates = new ArrayList<>();
+		List<LocalDate> availableCheckOutDates = new ArrayList<>();
+				
+		// If a room is selected, fetch available check-in dates for that room
+		if (roomNumber != null) {
+			availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
+		}
+		// If a check-in date is selected, fetch available check-out dates based on check-in date
+		if (checkInDate != null) {
+			LocalDate localCheckInDate = Instant.ofEpochMilli(checkInDate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+			availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, localCheckInDate);
+		}
+	    
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("rooms", rooms);
+		model.addAttribute("roomNumber", roomNumber);
+		model.addAttribute("checkInDate", checkInDate);
+		model.addAttribute("checkOutDate", checkOutDate);
+		model.addAttribute("availableCheckInDates", availableCheckInDates);
+		model.addAttribute("availableCheckOutDates", availableCheckOutDates);
+		
+		return "edit-reservation";
 	}
 	
+	/* This method is responsible for updating an existing reservation in the system.
+	 * It retrieves customer and room data based on the input in edit-reservation.html,
+	 * updates the existing reservation & associated billing, and redirects the user to the reservation page. */
+	@PostMapping("/reservation/edit")
+	public String updateReservation(@ModelAttribute("reservation") Reservation reservation,
+			@RequestParam("roomNumber") Integer roomId,
+			@RequestParam("checkInDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkInDate,
+			@RequestParam("checkOutDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOutDate) {
+		// for debugging, showing the roomId retrieved
+		Logger logger = LoggerFactory.getLogger(ReservationController.class);
+		logger.info("edit page roomId received: " + roomId);
+		
+		// Find room data based on input
+		Room room = roomService.getRoomById(roomId);
+
+		// Retrieve existing reservation from the database
+		Reservation existingReservation = reservationService.findReservationById(reservation.getReservationId()).orElse(null);
+		
+		// Get billing amount before updating the reservation
+		Billing originalBilling = billingService.findBillingById(existingReservation.getBilling().getBillingId());
+		double originalPaymentAmount = originalBilling.getAmount();
+				
+		// Set updated reservation details
+		existingReservation.setRoom(room);
+		existingReservation.setCheckInDate(checkInDate);
+		existingReservation.setCheckOutDate(checkOutDate);
+		
+		// Update the reservation
+		reservationService.updateReservation(existingReservation);
+		
+		// Get billing amount after updating the reservation
+		Billing updatedBilling = billingService.findBillingById(existingReservation.getBilling().getBillingId());
+		double updatedPaymentAmount = updatedBilling.getAmount();
+		
+		// Date formatter with date format: yyyy-MM-dd
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// Convert java.util.Date to java.time.LocalDate
+		LocalDate checkInLocalDate = existingReservation.getCheckInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate checkOutLocalDate = existingReservation.getCheckOutDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		// Format LocalDate using the formatter to get the date part only as a string
+		String formattedCheckInDate = checkInLocalDate.format(formatter);
+		String formattedCheckOutDate = checkOutLocalDate.format(formatter);
+
+		return "redirect:/reservation?message=The+reservation+has+been+updated+successfully!" + 
+				"+Reservation+ID%3A+" + existingReservation.getReservationId() +
+	            "+Room: " + existingReservation.getRoom().getRoomNumber() +
+	            ",+Check-in Date: " + formattedCheckInDate +
+	            ",+Check-out Date: " + formattedCheckOutDate +
+	            ",+Payment+Amount%3A+Original%3A+" + originalPaymentAmount + ",+Updated%3A+" + updatedPaymentAmount;
+	}
+
 	/* Method to delete reservation */
 	@GetMapping("/delete/{reservationId}")
 	public String deleteReservation(@PathVariable(name="reservationId") int reservationId) {

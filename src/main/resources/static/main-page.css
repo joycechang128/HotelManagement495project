@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/main-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-14
+	Last Modified: 2024-05-02
 	Description: This file contains the CSS styles for the Hotel Management System's main page (main.html)
 	             and all management pages
 */
@@ -400,4 +400,24 @@ input {
 	color: red;
 	font-size: 30px;
 	font-weight: bold;
+}
+
+/*
+	For successfully create message alert
+*/
+
+.alert {
+	padding: 20px;
+	color: #006B21;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+.alert-success {
+	background-color: palegreen;
+	border-color: #c3e6cb;
+}
+
+.text-center {
+	text-align: center;
 }
