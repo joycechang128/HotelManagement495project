@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-03
+ * Last Modified: 2024-05-04
  * Description: This controller manages the operations related to reservations in the hotel reservation system.
  *              It provides mappings for creating, updating, and deleting reservation data of customers, 
  *              as well as retrieving information about all reservation.
@@ -23,16 +23,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cmsc495.hotelmanagementapp.customer.Customer;
+import com.cmsc495.hotelmanagementapp.customer.CustomerRepository;
 import com.cmsc495.hotelmanagementapp.customer.CustomerService;
 import com.cmsc495.hotelmanagementapp.room.Room;
 import com.cmsc495.hotelmanagementapp.room.RoomService;
@@ -57,12 +59,27 @@ public class ReservationController {
 	@Autowired
 	private BillingService billingService;
 	
+	@Autowired
+	private ReservationRepository reservationRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private PlatformTransactionManager transactionManager;
+	
 	/* The value="reservation" will map to the <a href="reservation"> tag in html -> the reservation management button 
 	 * This method retrieves reservations data from the database and stores in the model for rendering in the view */
 	@GetMapping("/reservation")
 	public String getAllReservations(Model model) {
 		List<Reservation> reservations = reservationService.getAllReservations();
 		model.addAttribute("reservations", reservations);
+		
+		// Displaying summary in the reservation page
+		int totalNumOfReservations = reservationRepository.countAllReservations();
+	    int totalNumOfCustomers = customerRepository.countAllCustomers();
+	    model.addAttribute("totalNumOfReservations", totalNumOfReservations);
+	    model.addAttribute("totalNumOfCustomers", totalNumOfCustomers);
 		return "reservation";
 	}
 	
@@ -249,10 +266,37 @@ public class ReservationController {
 		",+Payment+Amount%3A+Original%3A+" + originalPaymentAmount + ",+Updated%3A+" + updatedPaymentAmount;
 	}
 
-	/* Method to delete reservation */
-	@GetMapping("/delete/{reservationId}")
+	/* This method handles the deletion of a reservation and its associated billing information.
+	 * It executes deletion operations within a transaction to ensure data consistency
+	 * If the deletion is successful, the transaction is committed and a success message is displayed,
+	 * if any exception occurs during the deletion process, the transaction is rolled back,
+	 * an error message is logged, and the user is redirected back to the Reservation page with an error message.
+	 * Return a redirect to the Reservation page with a success or error message based on the deletion outcome. */
+	@GetMapping("/reservation/delete/{reservationId}")
 	public String deleteReservation(@PathVariable(name="reservationId") int reservationId) {
-		reservationService.deleteReservationById(reservationId);
-		return "redirect:/reservation";
+		TransactionStatus status = null;
+		try {
+			// Execute deletion operations within a transaction
+			status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+			// Delete the reservation and the associated billing, billing should be deleted before reservation
+			billingService.deleteBillingById(reservationId);
+			reservationService.deleteReservationById(reservationId);
+
+			// Commit the transaction
+			transactionManager.commit(status);
+	        
+			String successMessage = "The reservation and its associated billing have been deleted successfully! Reservation ID: " + reservationId;
+
+			return "redirect:/reservation?message=" + successMessage.replace(" ", "+");
+		} catch (Exception e) {
+			// Rollback the transaction if an exception occurs
+			if (status != null && !status.isCompleted()) {
+				transactionManager.rollback(status);
+			}
+			// Log the exception and redirect back to the Reservation page with an error message
+			Logger logger = LoggerFactory.getLogger(ReservationController.class);
+			logger.error("Failed to delete reservation with ID: " + reservationId, e);
+			return "redirect:/reservation?error=Failed+to+delete+reservation.";
+	    }
 	}
 }

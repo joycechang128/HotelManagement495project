@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/main-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-05-02
+	Last Modified: 2024-05-03
 	Description: This file contains the CSS styles for the Hotel Management System's main page (main.html)
 	             and all management pages
 */
@@ -135,6 +135,10 @@ body {
 .stat-card-1 {
 	width: 35%;
 	grid-template-columns: repeat(1, 1fr);
+}
+
+.stat-card-2 {
+	grid-template-columns: repeat(2, 1fr);
 }
 
 .stat-card-3 {
@@ -416,6 +420,12 @@ input {
 .alert-success {
 	background-color: palegreen;
 	border-color: #c3e6cb;
+}
+
+.alert-danger {
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+	color: #721c24;
 }
 
 .text-center {

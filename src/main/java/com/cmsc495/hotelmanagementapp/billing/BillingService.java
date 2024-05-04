@@ -78,4 +78,7 @@ public class BillingService {
 	    return billingRepository.findById(billingId).orElse(null);
 	}
 
+	public void deleteBillingById(int billingId) {
+		billingRepository.deleteById(billingId);
+	}
 }
