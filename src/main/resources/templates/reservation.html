@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-05-02
+	Last Modified: 2024-05-04
 	Description: This HTML file represents the reservation page of the hotel management system,
 	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
@@ -67,10 +67,10 @@
 
 	<div class="container">
 		<!-- below is cards for statistic-->
-		<div class="stat-card stat-card-3">
+		<div class="stat-card stat-card-2">
 			<div class="card">
 				<div>
-					<div class="stats">12</div>
+					<div class="stats" th:text="${totalNumOfReservations}"></div>
 					<div class="card-name"># of Reservations</div>
 				</div>
 				<div class="card-icon">
@@ -79,20 +79,11 @@
 			</div>
 			<div class="card">
 				<div>
-					<div class="stats">10</div>
+					<div class="stats" th:text="${totalNumOfCustomers}"></div>
 					<div class="card-name"># of Customers</div>
 				</div>
 				<div class="card-icon">
 					<i class='bx bxs-face'></i>
-				</div>
-			</div>
-			<div class="card">
-				<div>
-					<div class="stats">5</div>
-					<div class="card-name">Overdue</div>
-				</div>
-				<div class="card-icon">
-					<i class='bx bx-alarm-exclamation'></i>
 				</div>
 			</div>
 		</div>
@@ -109,6 +100,10 @@
 			<!-- show successfully created message-->
 			<div th:if="${param.message}" class="alert alert-success text-center">
 				<span th:text="${param.message}"></span>
+			</div>
+			<!-- show error message-->
+			<div th:if="${param.error}" class="alert alert-danger text-center">
+				<span th:text="${param.error}"></span>
 			</div>
 			<section class="table_body">
 				<table>
@@ -141,7 +136,7 @@
 							</td>
 							<td>
 								<a th:href="@{'/reservation/edit/' + ${reservation.reservationId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</a>
-								<button th:href="@{'/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+								<a th:href="@{'/reservation/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn" onclick="return confirm('Are you sure?')"><i class='bx bxs-trash' ></i>Delete</button>
 							</td>
 						</tr>
 					</tbody>

@@ -13,6 +13,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cmsc495.hotelmanagementapp.billing.Billing;
@@ -60,6 +61,13 @@ public class Reservation {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "CheckOutDate", nullable = false)
 	private Date checkOutDate;
+	
+	// Summary attributes
+	@Formula(value = "(SELECT COUNT(*) FROM reservation r)")
+	private int totalNumOfReservations;
+	
+	@Formula(value = "(SELECT COUNT(*) FROM customer)")
+	private int totalNumOfCustomers;
 
 	/* constructor, reservationId is not required because it is generated automatically by the database */
 	public Reservation() {
@@ -155,6 +163,14 @@ public class Reservation {
 		this.checkOutDate = checkOutDate;
 	}
 	
+	public int getTotalNumOfReservations() {
+		return totalNumOfReservations;
+	}
+	
+	public int getTotalNumOfCustomers() {
+		return totalNumOfCustomers;
+	}
+
 	// the method for debugging
 	@Override
 	public String toString() {
