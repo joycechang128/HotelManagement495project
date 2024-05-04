@@ -13,7 +13,6 @@ package com.cmsc495.hotelmanagementapp.billing;
 import java.util.Date;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 import java.text.DecimalFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;

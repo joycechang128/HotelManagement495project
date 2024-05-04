@@ -157,8 +157,8 @@ public class ReservationController {
 		billingService.updateBilling(billing);
 		
 		return "redirect:/reservation?message=The+reservation+has+been+created+successfully!" + 
-				"+Reservation+ID%3A+" + reservation.getReservationId() +
-		        ",+Billing+ID%3A+" + reservation.getBilling().getBillingId();
+		"+Reservation+ID%3A+" + reservation.getReservationId() +
+		",+Billing+ID%3A+" + reservation.getBilling().getBillingId();
 	}
 	
 	/* Method to edit reservation, opening edit-reservation.html */
@@ -242,11 +242,11 @@ public class ReservationController {
 		String formattedCheckOutDate = checkOutLocalDate.format(formatter);
 
 		return "redirect:/reservation?message=The+reservation+has+been+updated+successfully!" + 
-				"+Reservation+ID%3A+" + existingReservation.getReservationId() +
-	            "+Room: " + existingReservation.getRoom().getRoomNumber() +
-	            ",+Check-in Date: " + formattedCheckInDate +
-	            ",+Check-out Date: " + formattedCheckOutDate +
-	            ",+Payment+Amount%3A+Original%3A+" + originalPaymentAmount + ",+Updated%3A+" + updatedPaymentAmount;
+		"+Reservation+ID%3A+" + existingReservation.getReservationId() +
+		"+Room: " + existingReservation.getRoom().getRoomNumber() +
+		",+Check-in Date: " + formattedCheckInDate +
+		",+Check-out Date: " + formattedCheckOutDate +
+		",+Payment+Amount%3A+Original%3A+" + originalPaymentAmount + ",+Updated%3A+" + updatedPaymentAmount;
 	}
 
 	/* Method to delete reservation */
