@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/create-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-04-23
-	Last Modified: 2024-04-23
+	Last Modified: 2024-05-03
 	Description: This file contains the CSS styles for all Hotel Management System's creating page
 */
 
@@ -47,17 +47,18 @@ h1 {
 	margin-bottom: 40px;
 }
 
-.create label {
-	width: 300px;
-	text-align: left;
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: left;
+    margin-bottom: 30px;
 }
 
-.input {
-	position: relative;
-	width: 300px;
-	margin: 30px 0;
-	border-bottom: 2px solid #000;
-	background-color: white;
+.info-value {
+    display: inline-block;
+    text-align: left;
+    font-size: 14px;
+    background-color: #f0f0f0;
 }
 
 button {
@@ -78,7 +79,7 @@ button:hover {
 	background-color: skyblue;
 }
 
-input, select {
+input, select, .info-value {
 	margin-bottom: 20px;
 	width: 300px;
 	height: 40px;

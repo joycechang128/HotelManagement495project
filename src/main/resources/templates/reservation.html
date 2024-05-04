@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-22
+	Last Modified: 2024-05-02
 	Description: This HTML file represents the reservation page of the hotel management system,
 	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
@@ -106,6 +106,10 @@
 					<a th:href="@{/reservation/new}" class="create">+ Create</a>
 				</div>
 			</section>
+			<!-- show successfully created message-->
+			<div th:if="${param.message}" class="alert alert-success text-center">
+				<span th:text="${param.message}"></span>
+			</div>
 			<section class="table_body">
 				<table>
 					<thead>
@@ -136,7 +140,7 @@
 								</p>
 							</td>
 							<td>
-								<button th:href="@{'/edit/' + ${reservation.reservationId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+								<a th:href="@{'/reservation/edit/' + ${reservation.reservationId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</a>
 								<button th:href="@{'/delete/' + ${reservation.reservationId}}" class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
 							</td>
 						</tr>

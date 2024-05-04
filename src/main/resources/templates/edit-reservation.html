@@ -1,28 +1,114 @@
+<!--
+	File: edit-reservation.html
+	Path: src/main/resources/templates/edit-reservation.html
+	Author: Chia-Yu(Joyce) Chang
+	Created: 2024-04-23
+	Last Modified: 2024-05-03
+	Description: This HTML file represents the editing page of the reservation system,
+	             which facilitates the management of reservations, allowing users to edit reservations.
+-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
 <head>
-    <meta charset="UTF-8">
-    <title>Edit Reservation</title>
+	<meta charset="UTF-8">
+	<title>Edit Reservation</title>
+	<link rel="stylesheet" href="/create-page.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-	<h1>New Reservation</h1>
-	<form action="/reservation/save" method="post" th:object="${reservation}">
-	    <label>Customer Name:</label>
-	    <input type="text" th:value="${reservation.customerName}" readonly><br>
-	    
-	    <label>Room Number:</label>
-	    <select id="roomNumber" name="roomNumber">
-	        <option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomNumber}" th:selected="${room.roomId eq reservation.roomId}"></option>
-	    </select><br>
-	    
-	    <label>Check-in Date:</label>
-	    <input type="text" id="checkInDate" name="checkInDate" th:value="${reservation.checkInDate}"><br>
-	    
-	    <label>Check-out Date:</label>
-	    <input type="text" id="checkOutDate" name="checkOutDate" th:value="${reservation.checkOutDate}"><br>
-	    
-	    <button type="submit">Submit</button>
-	</form>
+	<section>
+		<div class="create">
+			<!-- Go back to the prev page-->
+			<a href="javascript:history.go(-1)" class="goback-button">
+    			<i class="bx bx-arrow-back"></i> Go Back
+			</a>
+			<form action="/reservation/edit" th:action="@{/reservation/edit}" method="post" th:object="${reservation}">
+				<h1>Edit Reservation</h1>
+				
+				<input type="hidden" name="reservationId" th:value="${reservation.reservationId}">
+				
+				<!-- Displaying Reservation ID -->
+				<label for="reservationId">Reservation ID:</label>
+				<span class="info-value" th:text="${reservation.reservationId}" th:value="${reservation.reservationId}"></span><br>
+				
+				<label for="customerName">Customer Name:</label>
+				<span class="info-value" th:text="${reservation.customer.customerName}"></span><br>
+								
+				<label for="roomNumber">Room Number:</label>
+				<select id="roomNumber" name="roomNumber">
+					<option value="">Please select a room</option>
+					<option th:each="room : ${rooms}" th:value="${room.roomId}" th:text="${room.roomNumber}"></option>
+				</select><br>
+			
+				<label for="checkInDate">Check-in Date:</label>
+				<select id="checkInDate" name="checkInDate" th:readonly="${roomNumber == null}">
+					<option th:if="${roomNumber == null}" value="">Please select a room first</option>
+					<option th:each="date : ${availableCheckInDates}" th:value="${date}" th:text="${date}"></option>
+				</select><br>
+
+				<label for="checkOutDate">Check-out Date:</label>
+				<select id="checkOutDate" name="checkOutDate" th:readonly="${checkInDate == null}">
+					<option th:if="${checkInDate == null}">Please select a check-in date first</option>
+					<option th:each="date : ${availableCheckOutDates}" th:value="${date}" th:text="${date}"></option>
+				</select><br>
+			
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</section>
+	
+	<!-- JavaScript for selection -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// Event handler for room number selection change
+			$('#roomNumber').change(function() {
+				var roomNumber = $(this).val();
+				// Check if a room is selected
+				if (roomNumber) {
+					// Send an Ajax request to retrieve available check-in dates
+					$.get('/getAvailableCheckInDates?roomNumber=' + roomNumber, function(data) {
+						var checkInDateSelect = $('#checkInDate');
+						checkInDateSelect.empty();
+						checkInDateSelect.append('<option value="">Please select a check-in date</option>');
+						// Add available check-in dates to the dropdown list
+						$.each(data, function(index, date) {
+							checkInDateSelect.append('<option value="' + date + '">' + date + '</option>');
+						});
+						// Enable the check-in date dropdown list
+						checkInDateSelect.prop('disabled', false);
+					});
+				} else {
+					// If no room is selected, clear the check-in date dropdown list and disable it
+					$('#checkInDate').empty().prop('disabled', true);
+				}
+			});
+	        
+	        // Event handler for check-in date selection change
+	        $('#checkInDate').change(function() {
+				var roomNumber = $('#roomNumber').val();
+				var checkInDate = $(this).val();
+				if (checkInDate) {
+					// Send an Ajax request to retrieve available check-out dates based on the selected check-in date
+					$.get('/getAvailableCheckOutDates?roomNumber=' + roomNumber + '&checkInDate=' + checkInDate, function(data) {
+						var checkOutDateSelect = $('#checkOutDate');
+						checkOutDateSelect.empty();
+						checkOutDateSelect.append('<option value="">Please select a check-out date</option>');
+						// Add available check-out dates to the dropdown list
+						$.each(data, function(index, date) {
+							checkOutDateSelect.append('<option value="' + date + '">' + date + '</option>');
+						});
+						// Enable the check-out date dropdown list
+						checkOutDateSelect.prop('disabled', false);
+					});
+				} else {
+					$('#checkOutDate').empty().prop('disabled', true);
+				}
+			});
+		});
+	</script>
 </body>
 </html>
