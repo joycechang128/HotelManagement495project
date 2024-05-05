@@ -71,7 +71,7 @@ public class BillingController {
 		existingBilling.setPaymentStatus(paymentStatus);
 		billingService.updateBilling(existingBilling);
 	    
-	    return "redirect:/billing?message=The+billing+has+been+updated+successfully!" + 
+		return "redirect:/billing?message=The+billing+has+been+updated+successfully!" + 
 	    		"+Billing+ID%3A+" + existingBilling.getBillingId() + 
 	    		",+Updated+Payment+Status%3A+" + existingBilling.getPaymentStatus();
 	}
