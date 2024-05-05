@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/billing.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-05-03
+	Last Modified: 2024-05-04
 	Description: This HTML file represents the billing page of the hotel management system,
 	             which facilitates the management of billings, allowing users to add, delete, and modify billings.
 -->
@@ -70,7 +70,7 @@
 		<div class="stat-card stat-card-4">
 			<div class="card">
 				<div>
-					<div class="stats">22</div>
+					<div class="stats" th:text="${totalNumOfBillings}"></div>
 					<div class="card-name"># of Billings</div>
 				</div>
 				<div class="card-icon">
@@ -79,7 +79,7 @@
 			</div>
 			<div class="card">
 				<div>
-					<div class="stats">10</div>
+					<div class="stats" th:text="${numPaid}"></div>
 					<div class="card-name">Paid</div>
 				</div>
 				<div class="card-icon">
@@ -88,7 +88,7 @@
 			</div>
 			<div class="card">
 				<div>
-					<div class="stats">5</div>
+					<div class="stats" th:text="${numUnpaid}"></div>
 					<div class="card-name">Unpaid</div>
 				</div>
 				<div class="card-icon">
@@ -97,7 +97,7 @@
 			</div>
 			<div class="card">
 				<div>
-					<div class="stats">7</div>
+					<div class="stats" th:text="${numOverdue}"></div>
 					<div class="card-name">Overdue</div>
 				</div>
 				<div class="card-icon">
@@ -115,6 +115,10 @@
 					<input placeholder="customer">
 				</div>
 			</section>
+			<!-- show successfully created message-->
+			<div th:if="${param.message}" class="alert alert-success text-center">
+				<span th:text="${param.message}"></span>
+			</div>
 			<section class="table_body">
 				<table>
 					<thead>
@@ -145,7 +149,7 @@
 								</p>
 							</td>
 							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
+								<a th:href="@{'/billing/edit/' + ${billing.billingId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
 							</td>
 						</tr>
 					</tbody>
