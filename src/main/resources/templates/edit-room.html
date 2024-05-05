@@ -1,0 +1,57 @@
+<!--
+	File: edit-room.html
+	Path: src/main/resources/templates/edit-room.html
+	Author: Keita Alex Quirk-Arakaki
+	Created: 2024-05-03
+	Last Modified: 2024-05-05
+	Description: This HTML file defines the edit room page template for the hotel management application /for user to edit existing rooms.
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Room</title>
+    <link rel="stylesheet" href="/create-page.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<section>
+    <div class="create">
+
+        <a href="javascript:history.go(-1)" class="goback-button">
+            <i class="bx bx-arrow-back"></i> Go Back
+        </a>
+        <form th:action="@{/room/edit/{roomId}(roomId=${room.roomId})}" method="post">
+            <h1>Edit Room</h1>
+
+            <label for="roomId">Room ID:</label>
+            <input type="text" id="roomId" name="roomId" th:value="${room.roomId}" readonly><br>
+
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" id="roomNumber" name="roomNumber" th:value="${room.roomNumber}" readonly><br>
+
+            <label for="roomFloor">Room Floor:</label>
+            <input type="number" id="roomFloor" name="roomFloor" th:value="${room.roomFloor}" readonly><br>
+
+            <label for="roomType">Room Type:</label>
+            <input type="text" id="roomType" name="roomType" th:value="${room.roomType}" readonly><br>
+
+            <label for="availability">Room Availability:</label>
+            <select id="availability" name="availability" required th:value="${room.availability}">
+                <option value="true">Available</option>
+                <option value="false">Not Available</option>
+            </select><br>
+
+            <label for="cleaningStatus">Cleaning Status:</label>
+            <select id="cleaningStatus" name="cleaningStatus" required th:value="${room.cleaningStatus}">
+                <option value="Prepared">Prepared</option>
+                <option value="Needs Cleaning">Not Prepared</option>
+            </select><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

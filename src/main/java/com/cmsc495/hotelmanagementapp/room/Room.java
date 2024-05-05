@@ -5,9 +5,11 @@ package com.cmsc495.hotelmanagementapp.room;
  * Package: com.cmsc495.hotelmanagementapp.room
  * Author: Keita Alex Quirk-Arakaki
  * Created: 2024-04-11
- * Last Modified: 2024-04-30
- * Description: This file contains...
- * 				...
+ * Last Modified: 2024-05-03
+ * Description: This file defines the Room entity class. 
+ *              It represents a room in a hotel with attributes 
+ *              such as room number, floor, type, availability, 
+ *              and cleaning status.
  */
 
 import jakarta.persistence.Column;
@@ -21,7 +23,7 @@ import jakarta.persistence.Table;
 @Table(name = "room")
 public class Room {
 
-	@Id
+    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "RoomID")
     private int roomId;
@@ -99,5 +101,4 @@ public class Room {
     public void setCleaningStatus(String cleaningStatus) {
         this.cleaningStatus = cleaningStatus;
     }
-    
 }
