@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/customer.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-04-27
+	Last Modified: 2024-05-04
 	Description: This HTML file represents the customer page of the hotel management system,
 	             which facilitates the management of customers, allowing users to add, delete, and modify customers.
 -->
@@ -118,8 +118,8 @@
 								</p>
 							</td>
 							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-								<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+								<a th:href="@{'/customer/edit/' + ${customer.customerId}}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</a>
+								<a th:href="@{'/customer/delete/' + ${customer.customerId}}" class="action-btn delete-btn" onclick="return confirm('Are you sure?')"><i class='bx bxs-trash' ></i>Delete</button>
 							</td>
 						</tr>
 					</tbody>
