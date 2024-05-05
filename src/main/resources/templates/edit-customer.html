@@ -1,0 +1,56 @@
+<!--
+	File: edit-customer.html
+	Path: src/main/resources/templates/edit-customer.html
+	Author: Chia-Yu(Joyce) Chang
+	Created: 2024-05-04
+	Last Modified: 2024-05-04
+	Description: This HTML file represents the editing page of the customer system,
+	             which facilitates the management of customers, allowing users to edit information of customers.
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Customer</title>
+	<link rel="stylesheet" href="/create-page.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+	<section>
+		<div class="create">
+			<!-- Go back to the prev page-->
+			<a href="javascript:history.go(-1)" class="goback-button">
+    			<i class="bx bx-arrow-back"></i> Go Back
+			</a>
+			<form action="/customer/edit" th:action="@{/customer/edit}" method="post" th:object="${customer}">
+				<h1>Edit Customer</h1>
+				
+				<input type="hidden" name="customerId" th:value="${customer.customerId}">
+				
+				<!-- Displaying Billing ID -->
+				<label for="customerId">Billing ID:</label>
+				<span class="info-value" th:text="${customer.customerId}" th:value="${customer.customerId}"></span><br>
+				
+				<!-- Displaying Customer Name -->
+				<label for="customerName">Customer Name:</label>
+				<span class="info-value" th:text="${customer.customerName}"></span><br>
+	
+				<!-- Editing Customer Email -->
+				<label for="customerEmail">Email:</label>
+				<input type="text" id="customerEmail" name="customerEmail" th:value="${customer.customerEmail}">
+				<span class="error" th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}"></span><br>
+	
+				<!-- Editing Customer Phone Number -->
+				<label for="customerPhoneNumber">Phone Number:</label>
+				<input type="text" id="customerPhoneNumber" name="customerPhoneNumber" th:value="${customer.customerPhoneNumber}">
+				<span class="error" th:if="${#fields.hasErrors('customerPhoneNumber')}" th:errors="*{customerPhoneNumber}"></span><br>
+				
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

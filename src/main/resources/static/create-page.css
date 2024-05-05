@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/create-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-04-23
-	Last Modified: 2024-05-03
+	Last Modified: 2024-05-04
 	Description: This file contains the CSS styles for all Hotel Management System's creating page
 */
 
@@ -119,4 +119,12 @@ input, select, .info-value {
 
 .goback-button:hover {
 	background-color: #aaa;
+}
+
+/*
+	For error message
+*/
+
+.error {
+	color: red;
 }
