@@ -5,13 +5,15 @@ package com.cmsc495.hotelmanagementapp.billing;
  * Package: com.cmsc495.hotelmanagementapp.billing
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-01 
+ * Last Modified: 2024-05-04 
  * Description: This file contains the entity class that represents the a hotel customer's billing.
  *              It contains information such as billing id, payment status, 
  *              and associated customer and reservation details.
  */
 
 import java.util.Date;
+
+import org.hibernate.annotations.Formula;
 
 import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.reservation.Reservation;
@@ -48,6 +50,18 @@ public class Billing {
 	
 	@Column(name = "PaymentStatus", nullable = false)
 	private String paymentStatus;
+	
+	@Formula("(SELECT COUNT(*) FROM billing)")
+    private int totalNumOfBillings;
+
+    @Formula("(SELECT COUNT(*) FROM billing WHERE paymentStatus = 'Paid')")
+    private int numPaid;
+
+    @Formula("(SELECT COUNT(*) FROM billing WHERE paymentStatus = 'Unpaid')")
+    private int numUnpaid;
+
+    @Formula("(SELECT COUNT(*) FROM billing WHERE paymentStatus = 'Overdue')")
+    private int numOverdue;
 	
 	// constructor
 	public Billing() {}
