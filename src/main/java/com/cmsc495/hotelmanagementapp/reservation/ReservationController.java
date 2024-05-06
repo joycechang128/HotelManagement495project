@@ -68,6 +68,9 @@ public class ReservationController {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 	
+	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+
+	
 	/* The value="reservation" will map to the <a href="reservation"> tag in html -> the reservation management button 
 	 * This method retrieves reservations data from the database and stores in the model for rendering in the view */
 	@GetMapping("/reservation")
@@ -180,7 +183,7 @@ public class ReservationController {
 	
 	/* Method to edit reservation, opening edit-reservation.html */
 	@GetMapping("/reservation/edit/{reservationId}")
-	public String showEditReservationPage(@PathVariable("reservationId") int reservationId,
+	public String showEditReservationForm(@PathVariable("reservationId") int reservationId,
 			@RequestParam(name = "roomNumber", required = false) Integer roomNumber,
 			@RequestParam(name = "checkInDate", required = false) Date checkInDate, 
 			@RequestParam(name = "checkOutDate", required = false) Date checkOutDate, 
@@ -191,17 +194,17 @@ public class ReservationController {
 		// Retrieve all rooms for selection
 		List<Room> rooms = roomService.getAllRooms();
 		// Initialize available dates list
-		List<LocalDate> availableCheckInDates = new ArrayList<>();
-		List<LocalDate> availableCheckOutDates = new ArrayList<>();
+		List<LocalDate> availableCheckInDatesForEdit = new ArrayList<>();
+		List<LocalDate> availableCheckOutDatesForEdit = new ArrayList<>();
 				
 		// If a room is selected, fetch available check-in dates for that room
 		if (roomNumber != null) {
-			availableCheckInDates = reservationService.findAvailableDatesForRoom(roomNumber, true, null);
+			availableCheckInDatesForEdit = reservationService.findAvailableDatesForReservationEdit(roomNumber, true, reservationId, null);
 		}
 		// If a check-in date is selected, fetch available check-out dates based on check-in date
 		if (checkInDate != null) {
 			LocalDate localCheckInDate = Instant.ofEpochMilli(checkInDate.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-			availableCheckOutDates = reservationService.findAvailableDatesForRoom(roomNumber, false, localCheckInDate);
+			availableCheckOutDatesForEdit = reservationService.findAvailableDatesForReservationEdit(roomNumber, false, reservationId, localCheckInDate);
 		}
 	    
 		model.addAttribute("reservation", reservation);
@@ -209,10 +212,27 @@ public class ReservationController {
 		model.addAttribute("roomNumber", roomNumber);
 		model.addAttribute("checkInDate", checkInDate);
 		model.addAttribute("checkOutDate", checkOutDate);
-		model.addAttribute("availableCheckInDates", availableCheckInDates);
-		model.addAttribute("availableCheckOutDates", availableCheckOutDates);
+		model.addAttribute("availableCheckInDatesForEdit", availableCheckInDatesForEdit);
+		model.addAttribute("availableCheckOutDatesForEdit", availableCheckOutDatesForEdit);
 		
 		return "edit-reservation";
+	}
+	
+	/* This method retrieves a list of available check-in dates for editing the specified room. */
+	@GetMapping("/getAvailableCheckInDatesForEdit")
+	public ResponseEntity<List<LocalDate>> getAvailableCheckInDatesForEdit(@RequestParam("roomNumber") Integer roomId,
+			@RequestParam("reservationId") int reservationId) {
+		List<LocalDate> availableCheckInDatesForEdit = reservationService.findAvailableDatesForReservationEdit(roomId, true, reservationId, null);
+		return ResponseEntity.ok(availableCheckInDatesForEdit);
+	}
+	
+	/* This method retrieves a list of available check-out dates for editing the specified room. */
+	@GetMapping("/getAvailableCheckOutDatesForEdit")
+	public ResponseEntity<List<LocalDate>> getAvailableCheckOutDatesForEdit(@RequestParam("roomNumber") Integer roomId, 
+			@RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
+			@RequestParam("reservationId") int reservationId) {
+		List<LocalDate> availableCheckOutDatesForEdit = reservationService.findAvailableDatesForReservationEdit(roomId, false, reservationId, checkInDate);
+		return ResponseEntity.ok(availableCheckOutDatesForEdit);
 	}
 	
 	/* This method is responsible for updating an existing reservation in the system.

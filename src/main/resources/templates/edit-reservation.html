@@ -28,7 +28,7 @@
 			<form action="/reservation/edit" th:action="@{/reservation/edit}" method="post" th:object="${reservation}">
 				<h1>Edit Reservation</h1>
 				
-				<input type="hidden" name="reservationId" th:value="${reservation.reservationId}">
+				<input type="hidden" id="reservationId" name="reservationId" th:value="${reservation.reservationId}">
 				
 				<!-- Displaying Reservation ID -->
 				<label for="reservationId">Reservation ID:</label>
@@ -46,13 +46,13 @@
 				<label for="checkInDate">Check-in Date:</label>
 				<select id="checkInDate" name="checkInDate" th:readonly="${roomNumber == null}">
 					<option th:if="${roomNumber == null}" value="">Please select a room first</option>
-					<option th:each="date : ${availableCheckInDates}" th:value="${date}" th:text="${date}"></option>
+					<option th:each="date : ${availableCheckInDatesForEdit}" th:value="${date}" th:text="${date}"></option>
 				</select><br>
 
 				<label for="checkOutDate">Check-out Date:</label>
 				<select id="checkOutDate" name="checkOutDate" th:readonly="${checkInDate == null}">
 					<option th:if="${checkInDate == null}">Please select a check-in date first</option>
-					<option th:each="date : ${availableCheckOutDates}" th:value="${date}" th:text="${date}"></option>
+					<option th:each="date : ${availableCheckOutDatesForEdit}" th:value="${date}" th:text="${date}"></option>
 				</select><br>
 			
 				<button type="submit">Submit</button>
@@ -67,10 +67,11 @@
 			// Event handler for room number selection change
 			$('#roomNumber').change(function() {
 				var roomNumber = $(this).val();
+				var reservationId = $('#reservationId').val();
 				// Check if a room is selected
 				if (roomNumber) {
 					// Send an Ajax request to retrieve available check-in dates
-					$.get('/getAvailableCheckInDates?roomNumber=' + roomNumber, function(data) {
+					$.get('/getAvailableCheckInDatesForEdit?roomNumber=' + roomNumber + '&reservationId=' + reservationId, function(data) {
 						var checkInDateSelect = $('#checkInDate');
 						checkInDateSelect.empty();
 						checkInDateSelect.append('<option value="">Please select a check-in date</option>');
@@ -91,9 +92,10 @@
 	        $('#checkInDate').change(function() {
 				var roomNumber = $('#roomNumber').val();
 				var checkInDate = $(this).val();
+				var reservationId = $('#reservationId').val();
 				if (checkInDate) {
 					// Send an Ajax request to retrieve available check-out dates based on the selected check-in date
-					$.get('/getAvailableCheckOutDates?roomNumber=' + roomNumber + '&checkInDate=' + checkInDate, function(data) {
+					$.get('/getAvailableCheckOutDatesForEdit?roomNumber=' + roomNumber + '&checkInDate=' + checkInDate + '&reservationId=' + reservationId, function(data) {
 						var checkOutDateSelect = $('#checkOutDate');
 						checkOutDateSelect.empty();
 						checkOutDateSelect.append('<option value="">Please select a check-out date</option>');

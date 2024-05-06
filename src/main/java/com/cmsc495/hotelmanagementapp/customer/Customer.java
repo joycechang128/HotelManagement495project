@@ -18,6 +18,11 @@ import org.hibernate.annotations.Formula;
 import com.cmsc495.hotelmanagementapp.billing.Billing;
 import com.cmsc495.hotelmanagementapp.reservation.Reservation;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,12 +41,20 @@ public class Customer {
 	@Column(name = "CustomerID")
 	private int customerId;
 	
+	@NotBlank(message = "Customer name is required")
+	@Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
 	@Column(name = "CustomerName", nullable = false)
 	private String customerName;
-	
+
+
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email format")
 	@Column(name = "Email", nullable = false)
 	private String customerEmail;
-	
+
+
+	@NotBlank(message = "Phone number is required")
+	@Pattern(regexp = "^\\+(?:[0-9] ?){6,14}[0-9]$", message = "Invalid phone number")
 	@Column(name = "PhoneNumber", nullable = false)
 	private String customerPhoneNumber;
 	
