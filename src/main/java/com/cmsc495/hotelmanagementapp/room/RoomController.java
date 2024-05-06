@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class RoomController {
     @PostMapping("/save")
     public String saveRoom(@ModelAttribute("room") Room room, RedirectAttributes redirectAttributes) {
         roomService.createRoom(room);
-        redirectAttributes.addFlashAttribute("successMessage", "Room created successfully");
+        redirectAttributes.addFlashAttribute("successMessage", "Room with ID " + room.getRoomId() + " created successfully");
         return "redirect:/room";
     }
 
@@ -76,14 +77,24 @@ public class RoomController {
         if (updatedRoom == null) {
             return "error";
         }
-        redirectAttributes.addFlashAttribute("successMessage", "Room updated successfully");
+        redirectAttributes.addFlashAttribute("successMessage", "Room with ID " + roomId + " updated successfully with the following values: " +
+                "Room Number: " + updatedRoom.getRoomNumber() +
+                ", Room Floor: " + updatedRoom.getRoomFloor() +
+                ", Room Type: " + updatedRoom.getRoomType() +
+                ", Availability: " + updatedRoom.isAvailability() +
+                ", Cleaning Status: " + updatedRoom.getCleaningStatus());
         return "redirect:/room";
     }
 
     @DeleteMapping("/{roomId}")
     public ResponseEntity<Void> deleteRoom(@PathVariable int roomId, RedirectAttributes redirectAttributes) {
-        roomService.deleteRoom(roomId);
-        redirectAttributes.addFlashAttribute("successMessage", "Room deleted successfully");
-        return ResponseEntity.noContent().build();
+        try {
+            roomService.deleteRoom(roomId);
+            redirectAttributes.addFlashAttribute("successMessage", "Room with ID " + roomId + " deleted successfully");
+            return ResponseEntity.noContent().build();
+        } catch (ResponseStatusException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", ex.getReason());
+            return ResponseEntity.status(ex.getStatusCode()).build();
+        }
     }
 }

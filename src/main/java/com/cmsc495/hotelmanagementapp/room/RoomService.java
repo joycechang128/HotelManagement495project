@@ -19,6 +19,8 @@ import com.cmsc495.hotelmanagementapp.reservation.Reservation;
 import com.cmsc495.hotelmanagementapp.reservation.ReservationService;
 
 import org.springframework.http.HttpStatus;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,9 @@ public class RoomService {
     private ReservationService reservationService;
 
     public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+        List<Room> rooms = roomRepository.findAll();
+        rooms.sort(Comparator.comparingInt(Room::getRoomNumber));
+        return rooms;
     }
 
     public int countAvailableRooms() {
@@ -84,7 +88,6 @@ public class RoomService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Room not found with id: " + roomId);
         }
     }
-
 
     public Room getRoomById(int roomId) {
         return roomRepository.findById(roomId);
