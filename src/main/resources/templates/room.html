@@ -8,11 +8,8 @@
 	             which facilitates the management of rooms, allowing users to add, delete, and modify rooms.
 -->
 <!DOCTYPE html>
-<html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <title>Hotel Management Main Page with Sidebar Menu</title>
     <link rel="stylesheet" href="/main-page.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -118,6 +115,9 @@
         <div th:if="${successMessage}" class="alert alert-success text-center">
 			<p th:text="${successMessage}"></p>
         </div>
+        <div th:if="${errorMessage}" class="alert alert-danger text-center">
+            <p th:text="${errorMessage}"></p>
+        </div>
         <section class="table_body">
             <table>
                 <thead>
@@ -160,23 +160,27 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).on("click", ".delete-btn", function() {
-        if (confirm("Are you sure you want to delete this room?")) {
-            var roomId = $(this).closest("tr").find("td:first").text();
-            $.ajax({
-                type: "DELETE",
-                url: "/room/delete/" + roomId,
-                success: function() {
-                    alert("Room deleted successfully.");
-                    window.location.reload();
-                },
-                error: function(xhr, status, error) {
-                    var errorMessage = xhr.status + ': ' + xhr.statusText;
-                    alert('Error - ' + errorMessage);
-                }
-            });
-        }
-    });
+$(document).on("click", ".delete-btn", function() {
+    if (confirm("Are you sure you want to delete this room?")) {
+        var roomId = $(this).closest("tr").find("td:first").text();
+        $.ajax({
+            type: "DELETE",
+            url: "/room/" + roomId,
+            success: function() {
+                $(".alert").remove();
+                var successMessage = "Room with ID " + roomId + " deleted successfully.";
+                $("<div class='alert alert-success text-center'><p>" + successMessage + "</p></div>").insertBefore(".table_header");
+                $(this).closest("tr").remove();
+            },
+            error: function(xhr, status, error) {
+                $(".alert").remove();
+                var errorMessage ="Room deletion unsuccessful for room with ID " + roomId + ", a reservation exists for the room.";
+                $("<div class='alert alert-danger text-center'><p>" + errorMessage + "</p></div>").insertBefore(".table_header");
+            }
+        });
+    }
+});
+
 </script>
 
 </body>

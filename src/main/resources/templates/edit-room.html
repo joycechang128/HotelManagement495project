@@ -26,16 +26,16 @@
             <h1>Edit Room</h1>
 
             <label for="roomId">Room ID:</label>
-            <input type="text" id="roomId" name="roomId" th:value="${room.roomId}" readonly><br>
+            <input class="info-value" type="text" id="roomId" name="roomId" th:value="${room.roomId}" readonly><br>
 
             <label for="roomNumber">Room Number:</label>
-            <input type="text" id="roomNumber" name="roomNumber" th:value="${room.roomNumber}" readonly><br>
+            <input class="info-value" type="text" id="roomNumber" name="roomNumber" th:value="${room.roomNumber}" readonly><br>
 
             <label for="roomFloor">Room Floor:</label>
-            <input type="number" id="roomFloor" name="roomFloor" th:value="${room.roomFloor}" readonly><br>
+            <input class="info-value" type="number" id="roomFloor" name="roomFloor" th:value="${room.roomFloor}" readonly><br>
 
             <label for="roomType">Room Type:</label>
-            <input type="text" id="roomType" name="roomType" th:value="${room.roomType}" readonly><br>
+            <input class="info-value" type="text" id="roomType" name="roomType" th:value="${room.roomType}" readonly><br>
 
             <label for="availability">Room Availability:</label>
             <select id="availability" name="availability" required th:value="${room.availability}">
