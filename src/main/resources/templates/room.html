@@ -105,10 +105,6 @@
         	</div>
     	</div>
 	</div>
-	
-	<div th:if="${successMessage}" class="success-message">
-    	<p th:text="${successMessage}"></p>
-	</div>
 
     <!-- below is the table structure -->
     <main class="table">
@@ -119,6 +115,9 @@
                 <a th:href="@{/room/new}" class="create">+ Create</a>
             </div>
         </section>
+        <div th:if="${successMessage}" class="alert alert-success text-center">
+			<p th:text="${successMessage}"></p>
+        </div>
         <section class="table_body">
             <table>
                 <thead>
@@ -140,10 +139,13 @@
                         <td th:text="${room.roomType}"></td>
                         <td>
                             <i class="bx bx-check icon-true" th:if="${room.availability}"></i>
-                            <p class="status available" th:unless="${room.availability}"></p>
+                            <p class="bx bx-x icon-false" th:unless="${room.availability}"></p>
                         </td>
                         <td>
-                            <p class="status prepared" th:text="${room.cleaningStatus}"></p>
+							<p th:class="${room.cleaningStatus == 'Prepared' ? 'status prepared' : 
+										room.cleaningStatus == 'Needs Cleaning' ? 'status unprepared' : ''}">
+								<span th:text="${room.cleaningStatus}"></span>
+							</p>
                         </td>
                         <td>
                             <a th:href="@{/room/edit/{roomId}(roomId=${room.roomId})}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</a>

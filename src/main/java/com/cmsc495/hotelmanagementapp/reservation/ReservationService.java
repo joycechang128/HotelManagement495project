@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-01
+ * Last Modified: 2024-05-06
  * Description: This service class contains business logic operations related to reservations in the hotel management system.  
  *              It provides methods for handling CRUD operations on reservation data, as well as additional business logics.
  */
@@ -167,5 +167,10 @@ public class ReservationService {
 	
 	public void deleteReservationById(int reservationId) {
 		reservationRepository.deleteReservationByReservationId(reservationId);
+	}
+	
+	public List<Reservation> getReservationsByRoomId(int roomId) {
+		Room room = roomRepository.findById(roomId);
+		return reservationRepository.findByRoom(room);
 	}
 }
