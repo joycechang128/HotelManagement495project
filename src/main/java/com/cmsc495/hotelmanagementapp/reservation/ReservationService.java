@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.reservation;
  * Package: com.cmsc495.hotelmanagementapp.reservation
  * Author: Chia-Yu(Joyce) Chang
  * Created: 2024-04-11
- * Last Modified: 2024-05-01
+ * Last Modified: 2024-05-06
  * Description: This service class contains business logic operations related to reservations in the hotel management system.  
  *              It provides methods for handling CRUD operations on reservation data, as well as additional business logics.
  */
@@ -14,8 +14,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,6 +114,42 @@ public class ReservationService {
 		return availableDates;
 	}
 	
+	/* This method finds available check-in dates & check-out dates for editing a specific reservation,
+	 * considering the existing available dates provided by findAvailableDatesForRoom, which is used in creating a reservation.
+	 * isCheckInDates=true -> check-in date, isCheckInDates=false -> check-out date 
+	 * return a list of LocalDate objects */
+	public List<LocalDate> findAvailableDatesForReservationEdit(int roomId, boolean isCheckInDates, int reservationId, LocalDate selectedCheckInDate) {
+	    // Get the existing available dates using findAvailableDatesForRoom method
+		List<LocalDate> availableDates = new ArrayList<>();
+
+	    // Retrieve the reservation by its ID
+	    Reservation reservation = reservationRepository.findReservationByReservationId(reservationId).orElse(null);
+	    
+		logger.info("\nReservations for room {}: \n{}", roomId, reservation.toString());
+
+	    
+	    // Add the booked dates of the specified reservation to the available dates list
+	    LocalDate checkInDate = Instant.ofEpochMilli(reservation.getCheckInDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	    LocalDate checkOutDate = Instant.ofEpochMilli(reservation.getCheckOutDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+	    
+		logger.info("Checking reservation for room: {} | Check-in: {} | Check-out: {}", reservation.getRoomNumber(), checkInDate, checkOutDate);
+
+		
+	    if (isCheckInDates) {
+	    	// Get available check-in dates for the room, add the booked check-in date range
+	        availableDates = findAvailableDatesForRoom(roomId, true, null);
+	        availableDates.addAll(checkInDate.datesUntil(checkOutDate).collect(Collectors.toList()));
+	    } else {
+	    	// Get available check-out dates for the room, add the booked check-out date range
+	        availableDates = findAvailableDatesForRoom(roomId, false, selectedCheckInDate);
+	        availableDates.addAll(checkInDate.plusDays(1).datesUntil(checkOutDate).collect(Collectors.toList()));
+	    }
+	    
+	    // Sort and return the updated available dates list
+	    Collections.sort(availableDates);
+	    return availableDates;
+	}
+	
 	/* This method creates a new reservation record in a system */
 	public void createReservation(Reservation reservation) {
 		reservationRepository.save(reservation);
@@ -129,5 +167,10 @@ public class ReservationService {
 	
 	public void deleteReservationById(int reservationId) {
 		reservationRepository.deleteReservationByReservationId(reservationId);
+	}
+	
+	public List<Reservation> getReservationsByRoomId(int roomId) {
+		Room room = roomRepository.findById(roomId);
+		return reservationRepository.findByRoom(room);
 	}
 }
