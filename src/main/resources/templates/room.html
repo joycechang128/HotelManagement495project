@@ -3,158 +3,180 @@
 	Path: src/main/resources/templates/room.html
 	Author: Chia-Yu(Joyce) Chang, Keita Alex Quirk-Arakaki
 	Created: 2024-03-28
-	Last Modified: 2024-04-24
+	Last Modified: 2024-05-05
 	Description: This HTML file represents the room page of the hotel management system,
 	             which facilitates the management of rooms, allowing users to add, delete, and modify rooms.
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	
+
 <head>
-	<title>Hotel Management Main Page with Sidebar Menu</title>
-	<link rel="stylesheet" href="/main-page.css">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Hotel Management Main Page with Sidebar Menu</title>
+    <link rel="stylesheet" href="/main-page.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-	<nav class="sidebar">
-		<div class="title-menu">
-			<h2 class="title">LuxuRest.com</h2>
-			<i class='bx bx-menu button'></i>
-		</div>
-		
-		<ul class="list">
-			<li class="category">
-				<a href="room">
-					<i class='bx bxs-hotel' ></i>
-					<span class="link-name">Room Management</span>
-				</a>
-			</li>
-			<li class="category">
-				<a href="customer">
-					<i class='bx bxs-user-detail' ></i>
-					<span class="link-name">Customer Management</span>
-				</a>
-			</li>
-			<li class="category">
-				<a href="reservation">
-					<i class='bx bx-calendar-check' ></i>
-					<span class="link-name">Reservation Management</span>
-				</a>
-			</li>
-			<li class="category">
-				<a href="billing">
-					<i class='bx bx-dollar-circle'></i>
-					<span class="link-name">Billing Management</span>
-				</a>
-			</li>
-			<li class="category">
-				<a href="visualreport">
-					<i class='bx bxs-report'></i>
-					<span class="link-name">Visual Report</span>
-				</a>
-			</li>
-			<li class="category logout">
-				<a href="logout">
-					<i class='bx bx-log-out'></i>
-					<span class="link-name">Log Out</span>
-				</a>
-			</li>
-		</ul>		
-	</nav>
-	
-	<div class="container">
-		<!-- below is cards for statistic-->
-		<div class="stat-card stat-card-4">
-			<div class="card">
-				<div>
-					<div class="stats">10</div>
-					<div class="card-name"># of Rooms</div>
-				</div>
-				<div class="card-icon">
-					<i class='bx bx-bed'></i>
-				</div>
-			</div>
-			<div class="card">
-				<div>
-					<div class="stats">7</div>
-					<div class="card-name">Available</div>
-				</div>
-				<div class="card-icon">
-					<i class='bx bx-user-check'></i>
-				</div>
-			</div>
-			<div class="card">
-				<div>
-					<div class="stats">5</div>
-					<div class="card-name">Cleaning Prepared</div>
-				</div>
-				<div class="card-icon">
-					<i class='bx bx-check-square'></i>
-				</div>
-			</div>
-			<div class="card">
-				<div>
-					<div class="stats">5</div>
-					<div class="card-name">Available &amp; Prepared</div>
-				</div>
-				<div class="card-icon">
-					<i class='bx bx-check-double'></i>
-				</div>
-			</div>
-		</div>
-		
-		<!-- below is the table structure -->
-		<main class="table">
-			<section class="table_header">
-				<h1>Rooms</h1>
-				<div>
-					<input placeholder="room #">
-					<button class="create">+ Create</button>
-				</div>
-			</section>
-			<section class="table_body">
-				<table>
-					<thead>
-						<tr>
-							<th>id</th>
-							<th>Room Number</th>
-							<th>Floor</th>
-							<th>Room Type</th>
-							<th>Room Availability</th>
-							<th>Cleaning Status</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="room : ${rooms}" class="row">
-							<td th:text="${room.roomId}"></td>
-							<td th:text="${room.roomNumber}"></td>
-							<td th:text="${room.roomFloor}"></td>
-							<td th:text="${room.roomType}"></td>     
-							<td>
-								<i th:if="${room.availability}" class="bx bx-check icon-true"></i>
-								<i th:unless="${room.availability}" class="bx bx-x icon-false"></i>
-								<p th:class="${room.availability ? 'status available' : 'status unavailable'}">
-							</td>
-							<td>
-								<p th:class="${room.cleaningStatus == 'Prepared' ? 'status prepared' : 
-												room.cleaningStatus == 'Needs Cleaning' ? 'status unprepared' : ''}">
-									<span th:text="${room.cleaningStatus}"></span>
-								</p>
-							</td>
-							<td>
-								<button class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</button>
-								<button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-		</main>
+<nav class="sidebar">
+    <div class="title-menu">
+        <h2 class="title">LuxuRest.com</h2>
+        <i class='bx bx-menu button'></i>
+    </div>
+
+    <ul class="list">
+        <li class="category">
+            <a href="room">
+                <i class='bx bxs-hotel' ></i>
+                <span class="link-name">Room Management</span>
+            </a>
+        </li>
+        <li class="category">
+            <a href="customer">
+                <i class='bx bxs-user-detail' ></i>
+                <span class="link-name">Customer Management</span>
+            </a>
+        </li>
+        <li class="category">
+            <a href="reservation">
+                <i class='bx bx-calendar-check' ></i>
+                <span class="link-name">Reservation Management</span>
+            </a>
+        </li>
+        <li class="category">
+            <a href="billing">
+                <i class='bx bx-dollar-circle'></i>
+                <span class="link-name">Billing Management</span>
+            </a>
+        </li>
+        <li class="category">
+            <a href="visualreport">
+                <i class='bx bxs-report'></i>
+                <span class="link-name">Visual Report</span>
+            </a>
+        </li>
+        <li class="category logout">
+            <a href="logout">
+                <i class='bx bx-log-out'></i>
+                <span class="link-name">Log Out</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <!-- below is cards for statistic-->
+	<div class="stat-card stat-card-4">
+    	<div class="card">
+        	<div>
+            	<div class="stats" th:text="${totalRooms}"></div>
+            	<div class="card-name"># of Rooms</div>
+        	</div>
+        	<div class="card-icon">
+            	<i class='bx bx-bed'></i>
+        	</div>
+   		</div>
+    	<div class="card">
+        	<div>
+            	<div class="stats" th:text="${availableRooms}"></div>
+            	<div class="card-name">Available</div>
+        	</div>
+        	<div class="card-icon">
+            	<i class='bx bx-user-check'></i>
+        	</div>
+    	</div>
+    	<div class="card">
+        	<div>
+            	<div class="stats" th:text="${cleaningPreparedRooms}"></div>
+            	<div class="card-name">Cleaning Prepared</div>
+        	</div>
+        	<div class="card-icon">
+            	<i class='bx bx-check-square'></i>
+        	</div>
+    	</div>
+    	<div class="card">
+        	<div>
+            	<div class="stats" th:text="${availableAndPreparedRooms}"></div>
+            	<div class="card-name">Available &amp; Prepared</div>
+        	</div>
+        	<div class="card-icon">
+            	<i class='bx bx-check-double'></i>
+        	</div>
+    	</div>
 	</div>
+	
+	<div th:if="${successMessage}" class="success-message">
+    	<p th:text="${successMessage}"></p>
+	</div>
+
+    <!-- below is the table structure -->
+    <main class="table">
+        <section class="table_header">
+            <h1>Rooms</h1>
+            <div>
+                <input placeholder="room #">
+                <a th:href="@{/room/new}" class="create">+ Create</a>
+            </div>
+        </section>
+        <section class="table_body">
+            <table>
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Room Number</th>
+                    <th>Floor</th>
+                    <th>Room Type</th>
+                    <th>Room Availability</th>
+                    <th>Cleaning Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="room : ${rooms}" class="row">
+                        <td th:text="${room.roomId}"></td>
+                        <td th:text="${room.roomNumber}"></td>
+                        <td th:text="${room.roomFloor}"></td>
+                        <td th:text="${room.roomType}"></td>
+                        <td>
+                            <i class="bx bx-check icon-true" th:if="${room.availability}"></i>
+                            <p class="status available" th:unless="${room.availability}"></p>
+                        </td>
+                        <td>
+                            <p class="status prepared" th:text="${room.cleaningStatus}"></p>
+                        </td>
+                        <td>
+                            <a th:href="@{/room/edit/{roomId}(roomId=${room.roomId})}" class="action-btn edit-btn"><i class='bx bxs-edit'></i>Edit</a>
+                            <button class="action-btn delete-btn"><i class='bx bxs-trash' ></i>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on("click", ".delete-btn", function() {
+        if (confirm("Are you sure you want to delete this room?")) {
+            var roomId = $(this).closest("tr").find("td:first").text();
+            $.ajax({
+                type: "DELETE",
+                url: "/room/delete/" + roomId,
+                success: function() {
+                    alert("Room deleted successfully.");
+                    window.location.reload();
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = xhr.status + ': ' + xhr.statusText;
+                    alert('Error - ' + errorMessage);
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 
 </html>

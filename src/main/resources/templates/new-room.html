@@ -1,0 +1,74 @@
+<!--
+	File: new-room.html
+	Path: src/main/resources/templates/new-room.html
+	Author: Keita Alex Quirk-Arakaki
+	Created: 2024-05-03
+	Last Modified: 2024-05-05
+	Description: This HTML file defines the new room page template for the hotel management application /for user to create new rooms.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Room</title>
+    <link rel="stylesheet" href="/create-page.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <script>
+    function updateRoomFloor() {
+        var roomNumberInput = document.getElementById('roomNumber');
+        var roomFloorInput = document.getElementById('roomFloor');
+        var roomNumber = roomNumberInput.value;
+
+        if (roomNumber.length === 3) {
+            var roomFloor = roomNumber.substring(0, 1);
+        }
+
+        else if (roomNumber.length === 4) {
+            var roomFloor = roomNumber.substring(0, 2);
+        }
+
+        else {
+            var roomFloor = '';
+        }
+
+        roomFloorInput.value = roomFloor;
+    }
+</script>
+</head>
+<body>
+<section>
+    <div class="create">
+        <a href="javascript:history.go(-1)" class="goback-button">
+            <i class="bx bx-arrow-back"></i> Go Back
+        </a>
+        <form action="/room/save" method="post" oninput="updateRoomFloor()">
+            <h1>New Room</h1>
+            <label for="roomNumber">Room Number:</label>
+            <input type="text" id="roomNumber" name="roomNumber" pattern="\d{3,4}" title="Enter a 3-4 digit room number" required><br>
+            <label for="roomFloor">Room Floor:</label>
+            <input type="text" id="roomFloor" name="roomFloor" readonly><br>
+            <label for="roomType">Room Type:</label>
+            <select id="roomType" name="roomType" required>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="triple">Triple</option>
+                <option value="family">Family</option>
+            </select><br>
+            <label for="availability">Room Availability:</label>
+            <select id="availability" name="availability" required>
+                <option value="true">Available</option>
+                <option value="false">Not Available</option>
+            </select><br>
+            <label for="cleaningStatus">Cleaning Status:</label>
+            <select id="cleaningStatus" name="cleaningStatus" required>
+                <option value="prepared">Prepared</option>
+                <option value="not_prepared">Not Prepared</option>
+            </select><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
