@@ -30,13 +30,13 @@
 				
 				<input type="hidden" name="customerId" th:value="${customer.customerId}">
 				
-				<!-- Displaying Billing ID -->
-				<label for="customerId">Billing ID:</label>
-				<span class="info-value" th:text="${customer.customerId}" th:value="${customer.customerId}"></span><br>
+				<!-- Displaying Customer ID -->
+				<label for="customerId">Customer ID:</label>
+				<input class="info-value" type="text" id="customerId" name="customerId" th:value="${customer.customerId}" readonly></input><br>
 				
 				<!-- Displaying Customer Name -->
 				<label for="customerName">Customer Name:</label>
-				<span class="info-value" th:text="${customer.customerName}"></span><br>
+				<input class="info-value" type="text" id="customerName" name="customerName" th:value="${customer.customerName}" readonly></input><br>
 	
 				<!-- Editing Customer Email -->
 				<label for="customerEmail">Email:</label>

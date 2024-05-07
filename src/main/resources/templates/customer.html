@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/customer.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-05-04
+	Last Modified: 2024-05-07
 	Description: This HTML file represents the customer page of the hotel management system,
 	             which facilitates the management of customers, allowing users to add, delete, and modify customers.
 -->
@@ -85,9 +85,15 @@
 				<h1>Customers</h1>
 				<div>
 					<input placeholder="customer">
-					<button class="create">+ Create</button>
+					<a th:href="@{/customer/new}" class="create">+ Create</a>
 				</div>
 			</section>
+			<div th:if="${successMessage}" class="alert alert-success text-center">
+				<p th:text="${successMessage}"></p>
+        	</div>
+        	<div th:if="${errorMessage}" class="alert alert-danger text-center">
+            	<p th:text="${errorMessage}"></p>
+        	</div>
 			<section class="table_body">
 				<table>
 					<thead>

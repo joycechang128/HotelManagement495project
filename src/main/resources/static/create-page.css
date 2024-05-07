@@ -3,7 +3,7 @@
 	Path: src/main/resources/static/create-page.css
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-04-23
-	Last Modified: 2024-05-04
+	Last Modified: 2024-05-06
 	Description: This file contains the CSS styles for all Hotel Management System's creating page
 */
 
@@ -88,6 +88,10 @@ input, select, .info-value {
 	border: 1px solid #ccc;
 }
 
+.input-field.error-field:not(:empty) {
+    margin-bottom: 5px;
+}
+
 /*
 	For hint
 */
@@ -127,4 +131,7 @@ input, select, .info-value {
 
 .error {
 	color: red;
+	display: block;
+	font-size: 14px;
+	margin-top: 5px;
 }

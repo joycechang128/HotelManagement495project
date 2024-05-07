@@ -5,7 +5,7 @@ package com.cmsc495.hotelmanagementapp.customer;
  * Package: com.cmsc495.hotelmanagementapp.customer
  * Author: Chia-Yu(Joyce) Chang, Mrigank Gupta
  * Created: 2024-04-11
- * Last Modified: 2024-05-01
+ * Last Modified: 2024-05-07
  * Description: This service class contains business logic operations related to customers in the hotel management system.  
  *              It provides methods for handling CRUD operations on customer data, as well as additional business logics.
  */
@@ -16,6 +16,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.cmsc495.hotelmanagementapp.billing.Billing;
+import com.cmsc495.hotelmanagementapp.reservation.Reservation;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class CustomerService {
@@ -68,5 +71,18 @@ public class CustomerService {
 		} else {
 			return "Unpaid";
 		}
+	}
+	
+	public void createCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+	
+	@Transactional
+	public Customer updateCustomer(Customer customer) {
+        return customerRepository.save(customer);
+	}
+	
+	public Customer findCustomerByCustomerId(int customerId) {
+		return customerRepository.findCustomerByCustomerId(customerId);
 	}
 }
