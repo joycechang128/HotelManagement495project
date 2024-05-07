@@ -92,5 +92,9 @@ public class RoomService {
     public Room getRoomById(int roomId) {
         return roomRepository.findById(roomId);
     }
+    
+    public Room getRoomByNumber(int roomNumber) {
+        return roomRepository.findByRoomNumber(roomNumber);
+    }
 }
 

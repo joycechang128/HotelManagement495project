@@ -56,6 +56,12 @@ public class RoomController {
 
     @PostMapping("/save")
     public String saveRoom(@ModelAttribute("room") Room room, RedirectAttributes redirectAttributes) {
+        Room existingRoom = roomService.getRoomByNumber(room.getRoomNumber());
+        if (existingRoom != null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Room number already exists. Please choose a different room number.");
+            return "redirect:/room";
+        }
+
         roomService.createRoom(room);
         redirectAttributes.addFlashAttribute("successMessage", "Room with ID " + room.getRoomId() + " created successfully");
         return "redirect:/room";
