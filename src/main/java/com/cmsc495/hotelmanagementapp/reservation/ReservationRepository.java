@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.cmsc495.hotelmanagementapp.customer.Customer;
 import com.cmsc495.hotelmanagementapp.room.Room;
 
 @Repository
@@ -30,6 +31,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
 	List<Reservation> findAll();
 	
 	List<Reservation> findByRoom(Room room);
+	
+	List<Reservation> findByCustomer(Customer customer);
 	
 	void deleteReservationByReservationId(int reservationId);
 	
