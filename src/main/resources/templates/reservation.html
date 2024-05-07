@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/reservation.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-03-28
-	Last Modified: 2024-05-04
+	Last Modified: 2024-05-07
 	Description: This HTML file represents the reservation page of the hotel management system,
 	             which facilitates the management of reservations, allowing users to add, delete, and modify reservations.
 -->
@@ -145,5 +145,21 @@
 		</main>
 	</div>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$("input[placeholder='customer']").on("input", function() {
+    var searchText = $(this).val().toLowerCase();
+
+    $(".row").each(function() {
+        var customerName = $(this).find("td:nth-child(2)").text().toLowerCase();
+        if (customerName.includes(searchText)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+});
+</script>
 
 </html>

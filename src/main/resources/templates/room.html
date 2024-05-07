@@ -181,6 +181,18 @@ $(document).on("click", ".delete-btn", function() {
     }
 });
 
+$("input[placeholder='room #']").on("input", function() {
+    var searchText = $(this).val();
+
+    $(".row").each(function() {
+        var roomNumber = $(this).find("td:nth-child(2)").text();
+        if (roomNumber.includes(searchText)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+});
 </script>
 
 </body>

@@ -70,7 +70,7 @@
 		<div class="stat-card stat-card-1">
 			<div class="card">
 				<div>
-					<div class="stats">12</div>
+					<div class="stats" th:text="${totalNumOfCustomers}"></div>
 					<div class="card-name"># of Customers</div>
 				</div>
 				<div class="card-icon">
@@ -155,8 +155,19 @@ $(document).on("click", ".delete-btn", function() {
         });
     }
 });
-</script>
 
-</body>
+$("input[placeholder='customer']").on("input", function() {
+    var searchText = $(this).val().toLowerCase();
+
+    $(".row").each(function() {
+        var customerName = $(this).find("td:nth-child(2)").text().toLowerCase();
+        if (customerName.includes(searchText)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+});
+</script>
 
 </html>
