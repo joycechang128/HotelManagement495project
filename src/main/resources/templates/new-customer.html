@@ -3,7 +3,7 @@
 	Path: src/main/resources/templates/new-customer.html
 	Author: Chia-Yu(Joyce) Chang
 	Created: 2024-05-04
-	Last Modified: 2024-05-04
+	Last Modified: 2024-05-06
 	Description: This HTML file represents the creating page of the customer system,
 	             which facilitates the management of customers, allowing users to create customers.
 -->
@@ -25,19 +25,19 @@
 			<a href="javascript:history.go(-1)" class="goback-button">
     			<i class="bx bx-arrow-back"></i> Go Back
 			</a>
-			<form action="/customer/save" method="post">
+			<form action="/customer/save" method="post" th:object="${customer}">
 				<h1>New Customer</h1>
 				
 				<label for="customerName">Customer Name:</label>
-				<input type="text" id="customerName" name="customerName" th:value="${customer.customerName}">
+				<input type="text" id="customerName" name="customerName" th:value="${customer.customerName}" class="input-field error-field">
 				<span class="error" th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></span><br>
 	
 				<label for="customerEmail">Email:</label>
-				<input type="text" id="customerEmail" name="customerEmail" th:value="${customer.customerEmail}">
+				<input type="text" id="customerEmail" name="customerEmail" th:value="${customer.customerEmail}" class="input-field error-field">
 				<span class="error" th:if="${#fields.hasErrors('customerEmail')}" th:errors="*{customerEmail}"></span><br>
 	
 				<label for="customerPhoneNumber">Phone Number:</label>
-				<input type="text" id="customerPhoneNumber" name="customerPhoneNumber" th:value="${customer.customerPhoneNumber}">
+				<input type="text" id="customerPhoneNumber" name="customerPhoneNumber" th:value="${customer.customerPhoneNumber}" class="input-field error-field">
 				<span class="error" th:if="${#fields.hasErrors('customerPhoneNumber')}" th:errors="*{customerPhoneNumber}"></span><br>
 				
 				<button type="submit">Submit</button>
