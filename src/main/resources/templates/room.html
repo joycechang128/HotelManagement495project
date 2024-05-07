@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hotel Management Main Page with Sidebar Menu</title>
+    <title>Hotel Management Room Page with Sidebar Menu</title>
     <link rel="stylesheet" href="/main-page.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -45,12 +45,6 @@
             <a href="billing">
                 <i class='bx bx-dollar-circle'></i>
                 <span class="link-name">Billing Management</span>
-            </a>
-        </li>
-        <li class="category">
-            <a href="visualreport">
-                <i class='bx bxs-report'></i>
-                <span class="link-name">Visual Report</span>
             </a>
         </li>
         <li class="category logout">
@@ -169,13 +163,13 @@ $(document).on("click", ".delete-btn", function() {
             success: function() {
                 $(".alert").remove();
                 var successMessage = "Room with ID " + roomId + " deleted successfully.";
-                $("<div class='alert alert-success text-center'><p>" + successMessage + "</p></div>").insertBefore(".table_header");
+                $("<div class='alert alert-success text-center'><p>" + successMessage + "</p></div>").insertAfter(".table_header");
                 $(this).closest("tr").remove();
             },
             error: function(xhr, status, error) {
                 $(".alert").remove();
                 var errorMessage ="Room deletion unsuccessful for room with ID " + roomId + ", a reservation exists for the room.";
-                $("<div class='alert alert-danger text-center'><p>" + errorMessage + "</p></div>").insertBefore(".table_header");
+                $("<div class='alert alert-danger text-center'><p>" + errorMessage + "</p></div>").insertAfter(".table_header");
             }
         });
     }
