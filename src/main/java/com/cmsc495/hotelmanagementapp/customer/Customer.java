@@ -69,6 +69,9 @@ public class Customer {
 	
 	@Transient
 	private String overallPaymentStatus;
+	
+	@Formula(value = "(SELECT COUNT(*) FROM customer c)")
+	private int totalNumOfCustomers;
 		
 	// constructor
 	public Customer() {}

@@ -34,12 +34,18 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
 	/* The value="customer" will map to the <a href="customer"> tag in html -> the customer management button 
 	 * This method retrieves customers data from the database and stores in the model for rendering in the view */
 	@GetMapping("/customer")
 	public String getAllCustomers(Model model) {
 		List<Customer> customers = customerService.getAllCustomers();
 		model.addAttribute("customers", customers);
+		
+		int totalNumOfCustomers = customerRepository.countAllCustomers();
+		model.addAttribute("totalNumOfCustomers", totalNumOfCustomers);
 		return "customer";
 	}
 	
