@@ -3,7 +3,7 @@ package com.cmsc495.hotelmanagementapp.billing;
  * File: BillingService.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/billing/BillingService.java
  * Package: com.cmsc495.hotelmanagementapp.billing
- * Author: Chia-Yu(Joyce) Chang
+ * Author: Chia-Yu(Joyce) Chang, Bryce Campbell
  * Created: 2024-04-11
  * Last Modified: 2024-05-02
  * Description: This service class contains business logic operations related to billings in the hotel management system.  

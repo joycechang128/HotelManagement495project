@@ -12,11 +12,15 @@ package com.cmsc495.hotelmanagementapp.customer;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.cmsc495.hotelmanagementapp.billing.Billing;
 import com.cmsc495.hotelmanagementapp.reservation.Reservation;
+import com.cmsc495.hotelmanagementapp.reservation.ReservationService;
 
 import jakarta.transaction.Transactional;
 
@@ -25,6 +29,9 @@ public class CustomerService {
 	
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+    private ReservationService reservationService;
 	
 	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
@@ -80,6 +87,20 @@ public class CustomerService {
 	@Transactional
 	public Customer updateCustomer(Customer customer) {
         return customerRepository.save(customer);
+	}
+	
+	@Transactional
+	public void deleteCustomer(int customerId) {
+	    List<Reservation> reservations = reservationService.getReservationsByCustomerId(customerId);
+	    if (!reservations.isEmpty()) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot delete customer. There are reservations associated with this customer.");
+	    }
+
+	    try {
+	        customerRepository.deleteCustomerByCustomerId(customerId);
+	    } catch (EmptyResultDataAccessException ex) {
+	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found with ID: " + customerId);
+	    }
 	}
 	
 	public Customer findCustomerByCustomerId(int customerId) {

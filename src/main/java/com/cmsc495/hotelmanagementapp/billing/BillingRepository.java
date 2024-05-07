@@ -3,7 +3,7 @@ package com.cmsc495.hotelmanagementapp.billing;
  * File: BillingRepository.java
  * Path: src/main/java/com/cmsc495/hotelmanagementapp/billing/BillingRepository.java
  * Package: com.cmsc495.hotelmanagementapp.billing
- * Author: Chia-Yu(Joyce) Chang
+ * Author: Chia-Yu(Joyce) Chang, Bryce Campbell
  * Created: 2024-04-11
  * Last Modified: 2024-05-04
  * Description: This repository interface provides methods for accessing and manipulating data in the database related to billings. 

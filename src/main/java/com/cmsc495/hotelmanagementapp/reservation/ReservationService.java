@@ -23,6 +23,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cmsc495.hotelmanagementapp.customer.Customer;
+import com.cmsc495.hotelmanagementapp.customer.CustomerRepository;
 import com.cmsc495.hotelmanagementapp.room.Room;
 import com.cmsc495.hotelmanagementapp.room.RoomRepository;
 
@@ -39,6 +41,9 @@ public class ReservationService {
 	
 	@Autowired
 	private RoomRepository roomRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReservationService.class);
 	
@@ -173,4 +178,9 @@ public class ReservationService {
 		Room room = roomRepository.findById(roomId);
 		return reservationRepository.findByRoom(room);
 	}
+	
+	public List<Reservation> getReservationsByCustomerId(int customerId) {
+		Customer customer = customerRepository.findCustomerByCustomerId(customerId);
+        return reservationRepository.findByCustomer(customer);
+    }
 }
